@@ -4,7 +4,7 @@
 # usage: ./build.sh [--test] [--no-playall] [--no-keys] [--no-library] [--theme DIR]
 #                   STOCK_MECHEN_M30.HEX [OUTDIR]
 #   --test        also run the harnesses (shuffle, shuffle all, scroll, keys, library, m3u vis/hook, version)
-#   --coverflow   enable prepared M3U Cover Flow in the Now Playing artwork pane
+#   --coverflow   enable full-screen Cover Flow for prepared M3U playlists
 #   --sd-theme    load the selected Now Playing icon during the library scan
 #   --theme DIR   repaint UI bitmaps from the theme in DIR (tools/theme/sty.py), a folder of
 #                 <sty>_<bitmap-index>.ppm images

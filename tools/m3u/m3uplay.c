@@ -118,6 +118,12 @@ u32 m3u_file_click(u8 *arg0, u8 *state)
         vs->shuf_pos = 0;
 #ifdef M30_COVERFLOW
         vs->flow_pack=vd->flow_pack;
+#ifndef M3UPLAY_TEST
+        /* Publish the first shuffle epoch before the artwork preview runs.
+         * Cursor zero preserves the engine's first-skip starting position. */
+        if (vd->flow_pack)
+            vs->shuf_key=((((u32 (*)(u32,u32,u32,u32))0xbfc16a25u)(0,0,0,0x35)^0x3d)&0xffffu)|1u;
+#endif
         vs->handoff=M3U_HANDOFF_CLICK;
 #endif
         vs->magic = M3UPLAY_MAGIC;

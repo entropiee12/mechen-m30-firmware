@@ -112,7 +112,9 @@ struct vstate {
     u32  shuf_pos;              /* +0x68: current Feistel domain cursor */
     char line[M3U_LINE_CAP];    /* +0x6C: UTF-8 path buffer for mengine */
     u32 flow_pack;              /* +0x15c: prepared artwork pack, zero for ordinary playlists */
-    u32 handoff;                /* last playlist selection or engine mismatch */
+    u32 handoff;
+    u32 flow_disabled;
+    u32 native_visible;                /* last playlist selection or engine mismatch */
 };
 
 _Static_assert(sizeof(struct vstate)<=M3U_STATE_CAPACITY,"playlist state exceeds resident padding");

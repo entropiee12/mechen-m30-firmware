@@ -12,21 +12,35 @@ import mutagen
 
 
 def encode_art(image):
-    thumb = ImageOps.fit(image.convert("RGB"), (40, 40), method=Image.Resampling.LANCZOS)
+    size = 48
+    thumb = ImageOps.fit(image.convert("RGB"), (size, size), method=Image.Resampling.LANCZOS)
     colors = []
-    pixels = bytearray(40*40)
-    for y in (0, 20):
-        for x in (0, 20):
-            indexed = thumb.crop((x, y, x+20, y+20)).quantize(colors=16)
-            palette = indexed.getpalette()[:48]
-            palette += [0] * (48-len(palette))
-            colors.extend((r>>3)<<11 | (g>>2)<<5 | b>>3
+    pixels = bytearray(size * size)
+    for y in range(0, size, 12):
+        for x in (0, 24):
+            indexed = thumb.crop((x, y, x + 24, y + 12)).quantize(colors=8)
+            palette = indexed.getpalette()[:24]
+            palette += [0] * (24 - len(palette))
+            colors.extend((r >> 3) << 11 | (g >> 2) << 5 | b >> 3
                           for r, g, b in zip(palette[::3], palette[1::3], palette[2::3]))
             chunk = indexed.tobytes()
-            for j in range(20):
-                start = (y+j)*40+x
-                pixels[start:start+20] = chunk[j*20:j*20+20]
-    return struct.pack("<64H", *colors) + bytes(a | b<<4 for a,b in zip(pixels[::2], pixels[1::2]))
+            for j in range(12):
+                start = (y + j) * size + x
+                pixels[start:start + 24] = chunk[j * 24:j * 24 + 24]
+    packed = bytearray()
+    for start in range(0, len(pixels), 8):
+        group = sum(index << (3 * shift) for shift, index in enumerate(pixels[start:start + 8]))
+        packed.extend(group.to_bytes(3, "little"))
+    return struct.pack("<64H", *colors) + packed
+
+
+def encode_center(image):
+    cover = ImageOps.fit(image.convert("RGB"), (124, 104), method=Image.Resampling.LANCZOS)
+    rgb = cover.tobytes()
+    words = [(r >> 3) << 11 | (g >> 2) << 5 | (b >> 3)
+             for r, g, b in zip(rgb[::3], rgb[1::3], rgb[2::3])]
+    return b"".join(struct.pack("<248H", *words[start:start + 248]) + bytes(16)
+                    for start in range(0, len(words), 248))
 
 
 def artwork(path):
@@ -47,7 +61,7 @@ def artwork(path):
     for source in sources:
         try:
             with Image.open(source) as image:
-                return encode_art(image), True
+                return encode_art(image), encode_center(image), True
         except (OSError, ValueError):
             continue
     image = Image.new("RGB", (30, 30), "#15324a")
@@ -55,7 +69,7 @@ def artwork(path):
     pen.line([(12, 21), (12, 9), (22, 6), (22, 18)], fill="#bce6fa", width=2)
     for x, y in [(9, 21), (19, 18)]:
         pen.ellipse((x-2, y-1, x+3, y+2), fill="#bce6fa")
-    return encode_art(image), False
+    return encode_art(image), encode_center(image), False
 
 
 def fnv(data):
@@ -67,9 +81,9 @@ def fnv(data):
 
 def prepare(playlist, root, out):
     root = root.resolve()
-    rows, tiles = [], []
+    rows, tiles, centers = [], [], []
     missing = 0
-    digest = hashlib.sha256(b"M30 Cover Flow v1")
+    digest = hashlib.sha256(b"M30 Cover Flow v3")
     for raw in playlist.read_text(encoding="utf-8-sig").splitlines():
         line = raw.strip().replace("\\", "/")
         if not line or line.startswith("#"):
@@ -82,19 +96,21 @@ def prepare(playlist, root, out):
         if (not track.is_file() or len(name.encode()) >= 240 or len(relative.parts) > 9 or
                 any(len(p)>78 or any(ord(c)>65535 for c in p) for p in relative.parts)):
             raise ValueError(f"unavailable or unsupported M30 path: {name}")
-        tile, found = artwork(track)
+        tile, center, found = artwork(track)
         rows.append(name)
         tiles.append(tile)
+        centers.append(center)
         missing += not found
-        digest.update(name.encode() + b"\0" + tile)
+        digest.update(name.encode() + b"\0" + tile + center)
     if not 1 <= len(rows) <= 65535:
         raise ValueError("expected 1 to 65535 playlist entries")
     token = int.from_bytes(digest.digest()[:4], "little") & 0xfffffff or 1
     stem = f"F{token:07X}"
     sectors = bytearray()
     for index, tile in enumerate(tiles, 1):
-        prefix = struct.pack("<IIHH", 0x3146434d, token, index, len(tiles)) + tile + bytes(80)
+        prefix = struct.pack("<IIHH", 0x3346434d, token, index, len(tiles)) + tile + bytes(1008 - len(tile))
         sectors.extend(prefix + struct.pack("<I", fnv(prefix)))
+    sectors.extend(b"".join(centers))
     out.mkdir(parents=True, exist_ok=True)
     outputs = [(out / (stem+".CF7"), sectors),
                (out / (playlist.stem+" - Cover Flow.m3u8"), (f"#EXTM3U\n#CF7={token:07X}\n"+"\n".join(rows)+"\n").encode())]
