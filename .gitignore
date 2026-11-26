@@ -28,6 +28,9 @@
 *.elf
 *.o
 /build/
+# Per-checkout player location and temporary config writes
+/.m30-upload.json
+/.m30-upload.json.*
 *.bps
 # ...except the release patches, which hold only the changes and apply to the stock HEX
 !/patches/*.bps

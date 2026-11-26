@@ -149,6 +149,13 @@ The patched firmware installs the same way as an official MECHEN M30 firmware up
 
 After the upgrade, the player renames the file to `MECHEN_M30~.HEX`, so it doesn't install it again.
 
+To copy the firmware in step 3 with the uploader, run `python3 upload.py` from the repository.
+It finds the newest HEX under `build/` and detects the `MECHEN M30` volume on macOS, Linux,
+or Windows. Pass a HEX path or build directory to choose a specific build. The uploader asks
+before copying and saves the confirmed mount location in the local, Git-ignored
+`.m30-upload.json`. Use `--dry-run` to check the source and destination, or
+`--reset-config` to forget the saved location. On Linux, automatic mounting uses `udisksctl`.
+
 ### Turn on shuffle all songs
 
 To shuffle every song on the card:
