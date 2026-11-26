@@ -6,10 +6,15 @@ typedef unsigned int word;
 struct field { char key[18]; byte offset, maximum; };
 static const struct field fields[]={
     {"brightness",2,11},
+    {"off_timer",33,15},
+    {"sleep_timer",11,120},
+    {"backlight_timer",5,120},
 };
 
 static int allowed(const struct field *field,unsigned value)
 {
+    if (field->offset==5)
+        return value==0 || value==20 || value==40 || value==60 || value==120;
     return value<=field->maximum;
 }
 
@@ -36,6 +41,11 @@ void import_native(byte *record,const byte *buf,unsigned size)
         int value=number(buf,start,end);
         if (allowed(f,value) && record[f->offset]!=value) {
             record[f->offset]=value;
+            if (f->offset==33) {
+                unsigned ticks=value*120;
+                record[8]=ticks;
+                record[9]=ticks>>8;
+            }
             changed=1;
         }
     }
