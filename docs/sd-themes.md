@@ -7,9 +7,11 @@ The player shares one UTF-8 settings file with desktop editors. On the SD card, 
 ```ini
 theme=ember
 shuffle=on
+coverflow=on
+index_mode=manual
 ```
 
-Use `theme=stock` for the built-in icon and `shuffle=off` for sequential playback. Each menu updates its own key. A missing shuffle key keeps the native preference. The firmware reads up to 512 bytes with optional UTF-8 BOM and LF or CRLF endings. Device writes pad the file with whitespace. When the shared file is absent, a valid `/themes/active.cfg` is imported on first settings load with a mounted card. Per-theme manifests remain in their theme folders. Eject after editing, then restart the player.
+Use `theme=stock` for the built-in icon and `shuffle=off` for sequential playback. Each menu updates its own key. The Cover Flow key accepts `on` or `off` in builds with Cover Flow. Index Mode accepts `manual` or `auto`. A missing shuffle or index mode key keeps the native preference. The firmware reads up to 512 bytes with optional UTF-8 BOM and LF or CRLF endings. Device writes pad the file with whitespace. When the shared file is absent, a valid `/themes/active.cfg` is imported on first settings load with a mounted card. Per-theme manifests remain in their theme folders. Eject after editing, then restart the player.
 
 ```sh
 ./build.sh --sd-theme /path/to/stock/MECHEN_M30.HEX build/sd-theme

@@ -35,18 +35,18 @@ def install_gate(data, site, start, blob, symbols, launch, skip, original):
     replace(data, site, original, branch(site,start) + bytes.fromhex('0065')*(len(original)//2-1))
 
 
-def add_menu(data, callbacks):
+def add_menu(data, callbacks, first=221):
     table, count = struct.unpack_from('<HH', data, 12)
-    assert table == 16 and count in (18,19)
+    assert table == 16 and count in (18,19,20)
     entries = []
     for i in range(count):
         label, n, off, parent, idx = DESC.unpack_from(data,table+i*DESC.size)
         entries.append((label, bytes(data[off:off+n*ROW.size]),parent,idx))
     label, root, parent, idx = entries[0]
     stock_option = 0x40154c01
-    rows = [ROW.pack(0xffff, 222+i, 0, addr, 0, stock_option) for i,addr in enumerate(callbacks[1:])]
-    entries.append((221,b''.join(rows),0,len(root)//ROW.size))
-    entries[0] = (label,root+ROW.pack(count,221,0,callbacks[0],0,stock_option),parent,idx)
+    rows = [ROW.pack(0xffff, first+1+i, 0, addr, 0, stock_option) for i,addr in enumerate(callbacks[1:])]
+    entries.append((first,b''.join(rows),0,len(root)//ROW.size))
+    entries[0] = (label,root+ROW.pack(count,first,0,callbacks[0],0,stock_option),parent,idx)
     struct.pack_into('<H',data,14,len(entries))
     cursor = table+DESC.size*len(entries)
     offsets = {}
@@ -59,18 +59,18 @@ def add_menu(data, callbacks):
         DESC.pack_into(data,table+i*DESC.size,label,len(rows)//ROW.size,offsets[rows],parent,idx)
 
 
-def add_strings(data):
+def add_strings(data, first=221, labels=('Library indexing','Manual','Automatic')):
     for header in (0x10,0x20):
         table,n = struct.unpack_from('<IH',data,header)
         for i in range(n):
             entry=table+16*i
             base,size,kind,count=struct.unpack_from('<IIHH',data,entry)
             if kind!=1: continue
-            assert count==221
+            assert count==first
             pairs=[struct.unpack_from('<II',data,base+8*j) for j in range(count)]
             assert all(base+8*count<=p<=p+k<=base+size for p,k in pairs)
             strings=[bytes(data[p:p+k]) for p,k in pairs]
-            strings.extend((s+'\0').encode('utf-16-le') for s in ('Library indexing','Manual','Automatic'))
+            strings.extend((s+'\0').encode('utf-16-le') for s in labels)
             cursor=base+8*len(strings)
             offsets={}
             for j,s in enumerate(strings):
@@ -86,6 +86,7 @@ def add_strings(data):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('symbols',nargs=7,type=lambda s:int(s,16))
+    parser.add_argument('--flow',nargs=3,type=lambda s:int(s,16))
     args=parser.parse_args()
     images={}
     def member(n):
@@ -123,6 +124,9 @@ def main():
     replace(settings,0x6800,bytes(len(code)),code)
     add_menu(member('setting.mcg'),[v|1 for v in args.symbols[4:]])
     add_strings(member('setting.sty'))
+    if args.flow:
+        add_menu(member('setting.mcg'),[a|1 for a in args.flow],224)
+        add_strings(member('setting.sty'),224,('Cover Flow','On','Off'))
     for name,data in images.items(): Path(name).write_bytes(data)
 
 

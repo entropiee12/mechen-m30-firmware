@@ -41,4 +41,8 @@ assert 0x263c9a00 <= (entry & ~1) < 0x263c9a00 + len(text)
 assert struct.unpack_from('<II',data,0x10788) == (0x9fc0bf88,0xbfc09ce5)
 data[0xe400:0xe400+len(text)] = text
 struct.pack_into('<I',data,0x1078c,entry)
+if len(sys.argv)>7 and sys.argv[7]:
+    header = int(sys.argv[7],16)|1
+    assert 0x263c9a00 <= header < 0x263c9a00 + len(text)
+    struct.pack_into('<I',data,0x107b4,header)
 out.write_bytes(data)

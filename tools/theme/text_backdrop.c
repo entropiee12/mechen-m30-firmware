@@ -29,3 +29,16 @@ void text_backdrop(unsigned short *pixels,const struct text_region *slice,unsign
     }
     STOCK_TEXT(pixels,slice,mode);
 }
+
+#ifdef FLOW_PREF
+#include "../m3u/m3uplay.h"
+struct header_region {u16 x,y,width,height;};
+int flow_header_bitmap(u32 fd,u32 offset,const struct header_region *area)
+{
+    u32 target=WALL_DRAW_ENTRY;
+    if ((area->y+area->height<=28 || area->y>=179) && !VS->flow_disabled &&
+        *(volatile u32 *)0x9fc0bff8u==0x50690)
+        target=0xbfc0aa19u;
+    return ((int (*)(u32,u32,const struct header_region *))target)(fd,offset,area);
+}
+#endif

@@ -142,5 +142,22 @@ done:
     if (CTX!=~0u) FS(CTX,':',0,0,0);
     return result;
 }
+#ifdef FLOW_PREF
+#include "../m3u/m3uplay.h"
+static int flow_set(int enabled)
+{
+    char theme[9], value[4];
+    int shuffle;
+    /* The preferences call can replace this overlay's string literals. */
+    value[0]='o';
+    value[1]=enabled?'n':'f';
+    value[2]=enabled?0:'f';
+    value[3]=0;
+    return CTX!=~0u && preferences(CTX,theme,&shuffle,3,value)?0x8201:0x8203;
+}
+int flow_menu(u16 *title) {title[1]=title[6]=0xffff; title[3]=VS->flow_disabled?226:225; ((u32 *)title)[2]=0; return 0x8202;}
+int flow_on(void) {return flow_set(1);}
+int flow_off(void) {return flow_set(0);}
+#endif
 int theme_stock(void) { return choose("stock"); }
 #endif

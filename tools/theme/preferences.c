@@ -1,6 +1,9 @@
 /* One-sector SD settings store. The caller supplies its application's VFS
  * context and restores the root before returning it to stock code. */
 #include "theme_id.h"
+#ifdef FLOW_PREF
+#include "../m3u/m3uplay.h"
+#endif
 #include "settings_line.h"
 typedef unsigned int u32;
 typedef unsigned short u16;
@@ -86,17 +89,30 @@ int preferences(u32 ctx,char id[9],int *shuffle,unsigned field,const char *value
         if (legacy>0 && parse_theme_id(buf,legacy,id)) size=rewrite(buf,0,"theme",id);
         else { id[0]=0; size=rewrite(buf,0,"theme","stock"); }
     } else {
+#ifdef INDEX_SYNC
+        ((void (*)(const u8 *,unsigned))INDEX_SYNC)(buf,size);
+#endif
         unsigned a,b;
+#ifdef FLOW_PREF
+        if (setting_line(buf,size,"coverflow",&a,&b)==1)
+            VS->flow_disabled=b-a==3 && buf[a]=='o' && buf[a+1]=='f' && buf[a+2]=='f';
+#endif
         if (setting_line(buf,size,"theme",&a,&b)==1 && !parse_theme_id(buf+a,b-a,id)) id[0]=0;
         if (setting_line(buf,size,"shuffle",&a,&b)==1 && b-a>=2 && buf[a]=='o') {
             if (b-a==2 && buf[a+1]=='n') *shuffle=16;
             if (b-a==3 && buf[a+1]=='f' && buf[a+2]=='f') *shuffle=0;
         }
     }
-    if (field) size=rewrite(buf,size,field==1?"theme":"shuffle",value);
+    if (field) {
+        const char *key=field==1?"theme":field==2?"shuffle":field==3?"coverflow":"index_mode";
+        size=rewrite(buf,size,key,value);
+    }
     if (size<0) goto done;
     ok=(!field && (existing || !size)) || save(ctx,buf,size,existing);
 done:
+#ifdef FLOW_PREF
+    if (field==3 && ok) {VS->flow_disabled=value[1]=='f'; VS->native_visible=0;}
+#endif
     if (!field || (field==1 && ok)) load_wall(ctx,field?value:id);
     FS(ctx,':',0,0,0);
     return ok;

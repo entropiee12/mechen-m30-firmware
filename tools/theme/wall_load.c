@@ -67,3 +67,28 @@ int save(u32 ctx,unsigned char *buf,unsigned size,int existing)
     for (unsigned i=0;i<512;i++) check=check*31+buf[i];
     return check==hash;
 }
+
+#ifdef PREF_INDEX_VM
+#include "settings_line.h"
+#include "../community/index_mode.h"
+
+/* Config loads this before the stock automatic-index checks use the VM slot. */
+void sync_index(const unsigned char *buf,unsigned size)
+{
+    unsigned start,end;
+    if (setting_line(buf,size,"index_mode",&start,&end)!=1) return;
+    const unsigned char *v=buf+start;
+    unsigned len=end-start;
+    u32 mode;
+    if (len==4 && v[0]=='a' && v[1]=='u' && v[2]=='t' && v[3]=='o')
+        mode=INDEX_AUTO;
+    else if (len==6 && v[0]=='m' && v[1]=='a' && v[2]=='n' &&
+             v[3]=='u' && v[4]=='a' && v[5]=='l')
+        mode=INDEX_MANUAL;
+    else return;
+    u32 current=0;
+    int (*vm)(u32 *,u32,u32,u32)=(void *)PREF_INDEX_VM;
+    vm(&current,INDEX_VM_SLOT,sizeof(current),18);
+    if (current!=mode) vm(&mode,INDEX_VM_SLOT,sizeof(mode),19);
+}
+#endif

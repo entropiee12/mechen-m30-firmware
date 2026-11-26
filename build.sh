@@ -278,18 +278,20 @@ if [ "$SD_THEME" = 1 ]; then
   LIB_DEFS=-DSD_THEME
   blob listicon "$T/theme/list_icon.c" 0x26409800
   blob showicon "$T/theme/show_icon.c" 0x263c9874
-  blob textback "$T/theme/text_backdrop.c" 0x263c9a00
+  flow_pref=
+  if [ "$COVERFLOW" = 1 ]; then flow_pref=-DFLOW_PREF; fi
   blob walldraw "$T/theme/wall_draw.c" 0x261c9698 "-DLIST_ICON_ENTRY=(0x$(sym listicon.elf list_icon)|1u)"
-  "$PY" -I "$T/theme/patch_driver.py" "$F/drv_ui.drv" showicon.bin drv_ui.drv "$(sym walldraw.elf draw_wall)" "$(sym walldraw.elf clear_wall)" "$(sym textback.elf text_backdrop)"
+  blob textback "$T/theme/text_backdrop.c" 0x263c9a00 $flow_pref "-DWALL_DRAW_ENTRY=(0x$(sym walldraw.elf draw_wall)|1u)"
+  "$PY" -I "$T/theme/patch_driver.py" "$F/drv_ui.drv" showicon.bin drv_ui.drv "$(sym walldraw.elf draw_wall)" "$(sym walldraw.elf clear_wall)" "$(sym textback.elf text_backdrop)" "$(sym textback.elf flow_header_bitmap)"
   blob wall_music "$T/theme/wall_load.c" 0x40354e00 -DPREF_FS=0xbfc16bb5
   blob wall_setting "$T/theme/wall_load.c" 0x40094f00 -DPREF_FS=0xbfc1658d
-  blob wall_config "$T/theme/wall_load.c" 0x71252600 -DPREF_FS=0xbfc1658d
-  blob prefs_music "$T/theme/preferences.c" 0x40654d80 -DPREF_FS=0xbfc16bb5 -DPREF_SYS=0xbfc16bb1 "-DWALL_ENTRY=(0x$(sym wall_music.elf load_wall)|1u)" "-DSAVE_ENTRY=(0x$(sym wall_music.elf save)|1u)"
-  blob prefs_setting "$T/theme/preferences.c" 0x40014d00 -DPREF_FS=0xbfc1658d -DPREF_SYS=0xbfc16585 -DPREF_SETTING "-DWALL_ENTRY=(0x$(sym wall_setting.elf load_wall)|1u)" "-DSAVE_ENTRY=(0x$(sym wall_setting.elf save)|1u)"
-  blob prefs_config "$T/theme/preferences.c" 0x71152600 -DPREF_FS=0xbfc1658d -DPREF_SYS=0xbfc16585 "-DWALL_ENTRY=(0x$(sym wall_config.elf load_wall)|1u)" "-DSAVE_ENTRY=(0x$(sym wall_config.elf save)|1u)"
+  blob wall_config "$T/theme/wall_load.c" 0x71252600 -DPREF_FS=0xbfc1658d -DPREF_INDEX_VM=0xbfc16585
+  blob prefs_music "$T/theme/preferences.c" 0x40654d80 $flow_pref -DPREF_FS=0xbfc16bb5 -DPREF_SYS=0xbfc16bb1 "-DWALL_ENTRY=(0x$(sym wall_music.elf load_wall)|1u)" "-DSAVE_ENTRY=(0x$(sym wall_music.elf save)|1u)"
+  blob prefs_setting "$T/theme/preferences.c" 0x40014d00 $flow_pref -DPREF_FS=0xbfc1658d -DPREF_SYS=0xbfc16585 -DPREF_SETTING "-DWALL_ENTRY=(0x$(sym wall_setting.elf load_wall)|1u)" "-DSAVE_ENTRY=(0x$(sym wall_setting.elf save)|1u)"
+  blob prefs_config "$T/theme/preferences.c" 0x71152600 $flow_pref -DPREF_FS=0xbfc1658d -DPREF_SYS=0xbfc16585 "-DWALL_ENTRY=(0x$(sym wall_config.elf load_wall)|1u)" "-DSAVE_ENTRY=(0x$(sym wall_config.elf save)|1u)" "-DINDEX_SYNC=(0x$(sym wall_config.elf sync_index)|1u)"
   blob restore "$T/theme/picker.c" 0x40414d00 -DMUSIC_RESTORE "-DPREF_ENTRY=(0x$(sym prefs_music.elf preferences)|1u)"
   "$PY" -I "$T/theme/patch_restore.py" music.ap restore.bin "$(sym restore.elf music_mount)"
-  blob picker "$T/theme/picker.c" 0x40294e50 "-DPREF_ENTRY=(0x$(sym prefs_setting.elf preferences)|1u)"
+  blob picker "$T/theme/picker.c" 0x40294e50 $flow_pref "-DPREF_ENTRY=(0x$(sym prefs_setting.elf preferences)|1u)"
   blob discover "$T/theme/discover.c" 0x40214e00 "-DPICK_APPLY=0x$(sym picker.elf choose)"
   for f in setting.ap setting.sty setting.mcg; do
     [ -f "$f" ] || cp "$F/$f" "$f"
@@ -368,8 +370,12 @@ for f in config.ap udisk.ap mainmenu.ap setting.ap setting.mcg setting.sty; do
 done
 blob indexflag "$T/community/index_gate.S" 0
 blob indexevent "$T/community/index_gate.S" 0 -DINSERT_EVENT
-blob indexmenu "$T/community/index_menu.c" 0x402d5000
-"$PY" -I "$T/community/port.py" "$(sym indexflag.elf allowed)" "$(sym indexflag.elf suppressed)" \
+index_pref=()
+if [ "$SD_THEME" = 1 ]; then index_pref=("-DPREF_INDEX_ENTRY=(0x$(sym prefs_setting.elf preferences)|1u)"); fi
+blob indexmenu "$T/community/index_menu.c" 0x402d5000 "${index_pref[@]}"
+flow_actions=()
+if [ "$COVERFLOW" = 1 ]; then flow_actions=(--flow "$(sym picker.elf flow_menu)" "$(sym picker.elf flow_on)" "$(sym picker.elf flow_off)"); fi
+"$PY" -I "$T/community/port.py" "${flow_actions[@]}" "$(sym indexflag.elf allowed)" "$(sym indexflag.elf suppressed)" \
   "$(sym indexevent.elf allowed)" "$(sym indexevent.elf suppressed)" "$(sym indexmenu.elf index_menu)" \
   "$(sym indexmenu.elf index_manual)" "$(sym indexmenu.elf index_auto)"
 
@@ -378,8 +384,9 @@ if [ "$COVERFLOW" = 1 ]; then
   blob flow_queue "$T/coverflow/queue.c" 0x403d4f10
   blob flow_cache "$T/coverflow/cache.c" 0x48514720
   blob flow_draw "$T/coverflow/render.c" 0x7829b5f0
-  blob flow_device "$T/coverflow/device.c" 0x40594fa0 "-DFLOW_QUEUE_ENTRY=(0x$(sym flow_queue.elf flow_tracks)|1u)" "-DFLOW_CACHE_ENTRY=(0x$(sym flow_cache.elf flow_cache)|1u)" "-DFLOW_DRAW_ENTRY=(0x$(sym flow_draw.elf flow_render)|1u)"
-  "$PY" -I "$T/coverflow/patch.py" "$(sym flow_device.elf coverflow_refresh)" "$(sym flow_device.elf coverflow_bypass)"
+  blob flow_native "$T/coverflow/native.c" 0x48594700 "-DFLOW_DRAW_ENTRY=(0x$(sym flow_draw.elf flow_render)|1u)"
+  blob flow_device "$T/coverflow/device.c" 0x40594fa0 "-DFLOW_NATIVE_ENTRY=(0x$(sym flow_native.elf native_cover)|1u)" "-DFLOW_QUEUE_ENTRY=(0x$(sym flow_queue.elf flow_tracks)|1u)" "-DFLOW_CACHE_ENTRY=(0x$(sym flow_cache.elf flow_cache)|1u)" "-DFLOW_DRAW_ENTRY=(0x$(sym flow_draw.elf flow_render)|1u)"
+  "$PY" -I "$T/coverflow/patch.py" "$(sym flow_device.elf coverflow_refresh)" "$(sym flow_device.elf coverflow_bypass)" "$(sym flow_device.elf coverflow_text)" "$(sym flow_native.elf flow_scene_ui)" "$(sym flow_native.elf flow_metadata)"
 fi
 echo "== repack"
 "$PY" -I "$T/repack_fw.py" "$STOCK" "$W/stock/dec.bin" "$OUT/MECHEN_M30.HEX" \
