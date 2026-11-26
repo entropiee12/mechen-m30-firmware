@@ -336,6 +336,14 @@ fi
 [ -f playlist.ap ] || cp "$F/playlist.ap" playlist.ap
 case " $PATCHED " in *" playlist.ap "*) ;; *) PATCHED="$PATCHED playlist.ap" ;; esac
 "$PY" "$T/metadata/port.py" music.ap playlist.ap
+if [ "$M3UVIS:$M3UPLAY" = 1:1 ]; then
+  echo "== Music: expose the stock Playlists list and index playlist files"
+  cp "$F/music.mcg" music.mcg
+  blob index_title "$T/m3u/index_title.S" 0x40155120
+  [ "$(sym index_title.elf index_title)" = 40155120 ]
+  "$PY" "$T/m3u/patch_music_playlists.py"
+  PATCHED="$PATCHED music.mcg"
+fi
 if [ "$M3UPLAY" = 1 ]; then
   "${CROSS}gcc" $CFLAGS -c "$T/m3u/m3u_gate.S" -o gate.o
   "${CROSS}objcopy" -j .text -O binary gate.o gate.bin
