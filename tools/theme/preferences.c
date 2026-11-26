@@ -89,6 +89,9 @@ int preferences(u32 ctx,char id[9],int *shuffle,unsigned field,const char *value
         if (legacy>0 && parse_theme_id(buf,legacy,id)) size=rewrite(buf,0,"theme",id);
         else { id[0]=0; size=rewrite(buf,0,"theme","stock"); }
     } else {
+#ifdef IMPORT_NATIVE
+        if (!field && value) ((void (*)(u8 *,const u8 *,unsigned))IMPORT_NATIVE)((u8 *)value,buf,size);
+#endif
 #ifdef INDEX_SYNC
         ((void (*)(const u8 *,unsigned))INDEX_SYNC)(buf,size);
 #endif
@@ -126,7 +129,7 @@ u32 apply_preferences(u8 *record)
     int ctx=(signed char)SYS(1,16,0,41);
     if (ctx>=0) {
         char id[9]; int shuffle;
-        preferences(ctx,id,&shuffle,0,0);
+        preferences(ctx,id,&shuffle,0,(const char *)record);
         SYS(ctx,0,0,42);
         if (shuffle>=0 && record[38]!=shuffle) {
             record[38]=shuffle;
