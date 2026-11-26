@@ -8,6 +8,10 @@ static const struct field fields[]={
     {"brightness",2,11},
     {"language",14,27},
     {"repeat",37,4},
+    {"volume_limit",18,100},
+    {"default_volume",28,100},
+    {"default_volume_on",29,1},
+    {"line_level",31,2},
     {"off_timer",33,15},
     {"sleep_timer",11,120},
     {"backlight_timer",5,120},
@@ -44,6 +48,7 @@ void import_native(byte *record,const byte *buf,unsigned size)
         int value=number(buf,start,end);
         if (allowed(f,value) && record[f->offset]!=value) {
             record[f->offset]=value;
+            if (f->offset==18 && record[19]>value) record[19]=value;
             if (f->offset==33) {
                 unsigned ticks=value*120;
                 record[8]=ticks;
