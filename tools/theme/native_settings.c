@@ -6,6 +6,8 @@ typedef unsigned int word;
 struct field { char key[18]; byte offset, maximum; };
 static const struct field fields[]={
     {"brightness",2,11},
+    {"language",14,27},
+    {"repeat",37,4},
     {"off_timer",33,15},
     {"sleep_timer",11,120},
     {"backlight_timer",5,120},
@@ -13,6 +15,7 @@ static const struct field fields[]={
 
 static int allowed(const struct field *field,unsigned value)
 {
+    if (field->offset==37 && value==3) return 0;
     if (field->offset==5)
         return value==0 || value==20 || value==40 || value==60 || value==120;
     return value<=field->maximum;
