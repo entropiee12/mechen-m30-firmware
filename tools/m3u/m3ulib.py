@@ -135,7 +135,7 @@ def cmd_check(card):
         return 2
 
     files = sorted(f for f in os.listdir(pldir)
-                   if f.lower().endswith(".m3u"))
+                   if f.lower().endswith((".m3u", ".m3u8")))
     rc = 0
 
     def check(ok, msg):
@@ -149,11 +149,16 @@ def cmd_check(card):
     check(all(r["title"] for r in recs),
           "every record has a non-empty title")
     check(len(recs) == len(files),
-          "the index holds %d records and the card holds %d .m3u files"
+          "the index holds %d records and the card holds %d playlist files"
           % (len(recs), len(files)))
 
     def norm(name):
-        return name[:-4].lower() if name.lower().endswith(".m3u") else name.lower()
+        lower=name.lower()
+        if lower.endswith(".m3u8"):
+            return name[:-5].lower()
+        if lower.endswith(".m3u"):
+            return name[:-4].lower()
+        return lower
 
     # The stored title is 64 bytes: a BOM, then 30 UTF-16LE characters, then
     # the terminator. A name longer than 30 characters is truncated, so an
@@ -167,14 +172,14 @@ def cmd_check(card):
 
     def matches(rec_title, file_name):
         t, f = stored(rec_title), norm(file_name)
-        return len(t) >= TITLE_MIN and (f == t or f.startswith(t))
+        return f == t or (len(t) >= TITLE_MIN and f.startswith(t))
 
     unindexed = [f for f in files if not any(matches(r["title"], f)
                                              for r in recs)]
     leftovers = [r for r in recs if not any(matches(r["title"], f)
                                             for f in files)]
     check(not unindexed,
-          "every .m3u on the card is indexed (missing: %s)"
+          "every playlist on the card is indexed (missing: %s)"
           % (", ".join(unindexed) if unindexed else "none"))
     check(not leftovers,
           "the index names no playlist that is absent (extra: %s)"
