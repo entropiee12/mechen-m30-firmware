@@ -6,7 +6,10 @@ typedef unsigned int word;
 struct field { char key[18]; byte offset, maximum; };
 static const struct field fields[]={
     {"brightness",2,11},
+    {"time_format",12,1},
+    {"date_format",13,2},
     {"language",14,27},
+    {"usb_mode",15,1},
     {"repeat",37,4},
     {"volume_limit",18,100},
     {"default_volume",28,100},
@@ -16,7 +19,6 @@ static const struct field fields[]={
     {"sleep_timer",11,120},
     {"backlight_timer",5,120},
 };
-
 static int allowed(const struct field *field,unsigned value)
 {
     if (field->offset==37 && value==3) return 0;
@@ -65,6 +67,18 @@ void import_native(byte *record,const byte *buf,unsigned size)
 #define READ ((int (*)(word,const char *,byte *))READ_ENTRY)
 #define REWRITE ((int (*)(byte *,unsigned,const char *,const char *))REWRITE_ENTRY)
 #define SAVE ((int (*)(word,byte *,unsigned,int))SAVE_ENTRY)
+static char *numstr(char *digits,unsigned value)
+{
+    char *p=digits+3;
+    *p=0;
+    do {
+        unsigned tens=0;
+        while (value>=10) {value-=10; tens++;}
+        *--p='0'+value;
+        value=tens;
+    } while (value);
+    return p;
+}
 static void export_native(word ctx,const byte *record)
 {
     union { word alignment[128]; byte data[512]; } block;
@@ -79,15 +93,8 @@ static void export_native(word ctx,const byte *record)
         if (!allowed(f,value)) continue;
         int found=setting_line(buf,size,f->key,&start,&end);
         if (found<0 || (found && number(buf,start,end)==(int)value)) continue;
-        char digits[4],*p=digits+3;
-        *p=0;
-        do {
-            unsigned tens=0;
-            while (value>=10) {value-=10; tens++;}
-            *--p='0'+value;
-            value=tens;
-        } while (value);
-        size=REWRITE(buf,size,f->key,p);
+        char digits[4];
+        size=REWRITE(buf,size,f->key,numstr(digits,value));
         if (size<0) return;
         changed=1;
     }
