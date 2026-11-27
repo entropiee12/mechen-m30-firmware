@@ -94,10 +94,17 @@ static void export_native(word ctx,const byte *record)
     if (changed) SAVE(ctx,buf,size,exists);
 }
 
+#ifndef SETTINGS_CARD_CONTEXT
+#define SETTINGS_CARD_CONTEXT (*(volatile word *)0x9fc1550cu)
+#endif
 int save_native(byte *record,word slot,word length,word op)
 {
     int result=SYS((word)record,slot,length,op);
-    if (SYS(1,0,(word)"card.drv",10)==0) {
+    word live_context=SETTINGS_CARD_CONTEXT;
+    if (live_context<=127) {
+        export_native(live_context,record);
+        ((int (*)(word,word,word,word,word))0xbfc1658du)(live_context,':',0,0,0);
+    } else if (SYS(1,0,(word)"card.drv",10)==0) {
         int ctx=(signed char)SYS(1,16,0,41);
         if (ctx>=0) {
             export_native(ctx,record);
