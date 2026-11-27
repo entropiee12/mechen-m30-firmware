@@ -58,13 +58,14 @@ for site,pool in [(0x380a,0x3b24)]:
     assert data[site:site+6]==struct.pack('<HHH',0x6f03,load,0xeac0)
     assert struct.unpack_from('<I',data,pool)[0]==0xbfc16405
     data[site:site+6]=jal(text_entry)+bytes.fromhex('036f')
-# Stock paints three background bands (including the top 28 pixels), icons,
-# counters and timers through these two local UI-service pointers.
+# The Now Playing painter uses the pointer in its own bank. The pointer at
+# 0x2f1c belongs to the shared Music menu; filtering it hides menu rows.
 scene=int(sys.argv[4],16)
 assert 0x48594700<=scene<0x48594c00 and scene%4==0
-for pool in (0x3b24,0x2f1c):
+for pool in (0x3b24,):
     assert struct.unpack_from('<I',data,pool)[0]==0xbfc16405
     struct.pack_into('<I',data,pool,scene|1)
+assert struct.unpack_from('<I',data,0x2f1c)[0]==0xbfc16405
 metadata=int(sys.argv[5],16)
 assert 0x48594700<=metadata<0x48594c00 and metadata%4==0
 assert data[0x375a:0x3760]==jal(0x40154c88)+bytes.fromhex('0065')

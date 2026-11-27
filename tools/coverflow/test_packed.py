@@ -13,6 +13,10 @@ QEMU = os.environ.get("QEMU", "qemu-mipsel-static")
 
 def run(work, pack, output=None, automatic=False):
     firmware = (work / "verify/fw/music.ap").read_bytes()
+    # The Music menu's UI service must never route through the Now Playing
+    # filter: it needs those calls to paint every list row.
+    assert struct.unpack_from("<I",firmware,0x2f1c)[0]==0xbfc16405
+    assert struct.unpack_from("<I",firmware,0x3b24)[0]!=0xbfc16405
     symbols = subprocess.check_output([CROSS+"nm", str(work/"flow_auto.elf")], text=True)
     auto_entry = next(int(line.split()[0], 16) | 1
                       for line in symbols.splitlines() if line.endswith(" flow_auto_paint"))
