@@ -36,7 +36,10 @@ struct header_region {u16 x,y,width,height;};
 int flow_header_bitmap(u32 fd,u32 offset,const struct header_region *area)
 {
     u32 target=WALL_DRAW_ENTRY;
-    if ((area->y+area->height<=28 || area->y>=179) && !VS->flow_disabled &&
+    /* Music lists share the style with Now Playing. Common list art must
+     * still pass through draw_wall, including rows in the footer band. */
+    if (fd!=*(volatile u32 *)0x9fc0bfd4u &&
+        (area->y+area->height<=28 || area->y>=179) && !VS->flow_disabled &&
         *(volatile u32 *)0x9fc0bff8u==0x50690)
         target=0xbfc0aa19u;
     return ((int (*)(u32,u32,const struct header_region *))target)(fd,offset,area);
