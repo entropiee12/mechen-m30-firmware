@@ -131,28 +131,11 @@ static int load_neighbor(u32 track,struct flow_tile *tile,void *opaque)
     return ok;
 }
 
-static void empty_tile(struct flow_tile *tile,u32 track,u32 count,u32 source_id)
-{
-    for (unsigned i=0;i<sizeof(*tile);i++) ((u8 *)tile)[i]=0;
-    tile->magic=FLOW_MAGIC;
-    tile->pack=source_id;
-    tile->track=(u16)track;
-    tile->count=(u16)count;
-    for (unsigned i=0;i<64;i++) tile->palette[i]=0x2947;
-    const u8 *bytes=(const u8 *)tile;
-    u32 hash=2166136261u;
-    for (unsigned i=0;i<sizeof(*tile)-sizeof(tile->checksum);i++) hash=(hash^bytes[i])*16777619u;
-    tile->checksum=hash;
-}
-
 static int load_or_empty(u32 track,struct flow_tile *tile,void *opaque)
 {
     struct auto_reader *r=opaque;
     if (!r->budget) return 0;
-    if (load_neighbor(track,tile,opaque)) return 1;
-    /* A failed/missing decode is cached as a neutral tile, not retried forever. */
-    empty_tile(tile,track,r->count,r->source_id);
-    return 1;
+    return load_neighbor(track,tile,opaque);
 }
 
 int flow_auto_paint(u32 kind,u32 pos,u32 count)
@@ -160,12 +143,12 @@ int flow_auto_paint(u32 kind,u32 pos,u32 count)
     u16 *buffer=*(u16 *volatile *)0x9fc0bf50u;
     u32 bytes=*(volatile u16 *)0x9fc0bf54u;
     if (!pos || pos>count || !buffer || ((u32)buffer&3) ||
-        bytes<3072+FLOW_SLOTS*sizeof(struct flow_tile)) return 0;
+        bytes<3072+FLOW_SLOTS*sizeof(struct flow_tile)) return -1;
     u32 index_sector=0,first=0;
     if (kind==2) {
         index_sector=*(volatile u16 *)0x9fc15f58u; /* 0x9fc15f4c+0x0c */
         first=*(volatile u16 *)0x9fc15f70u;
-        if (!index_sector || first==0xffff) return 0;
+        if (!index_sector || first==0xffff) return -2;
     }
     u16 tracks[FLOW_SLOTS];
     if (kind==1) {
@@ -176,7 +159,7 @@ int flow_auto_paint(u32 kind,u32 pos,u32 count)
     }
 
     u32 ctx,installed;
-    if (!open_card(&ctx,&installed)) return 0;
+    if (!open_card(&ctx,&installed)) return -3;
     struct auto_reader r;
     r.ctx=ctx;
     r.index_sector=index_sector;
@@ -189,16 +172,16 @@ int flow_auto_paint(u32 kind,u32 pos,u32 count)
     r.source_id^=(index_sector<<16)|first;
     r.source_id^=kind<<28;
     if (kind==1) r.source_id^=VS->disk;
-    r.budget=VS->native_visible?2:3;
+    r.budget=3;
     r.kind=kind;
     r.work=buffer+384;
     r.file=0;
     if (kind==1) copy(&r.snapshot,(const void *)VS,sizeof(r.snapshot));
     else {
         r.file=open_named(ctx,"MUSIC.LIB");
-        if (!r.file) { close_card(ctx,installed); return 0; }
+        if (!r.file) { close_card(ctx,installed); return -4; }
         if (FS(ctx,(u32)&r.sectors,r.file,0,OP_SIZE)<0) {
-            FS(ctx,r.file,0,0,OP_CLOSE); close_card(ctx,installed); return 0;
+            FS(ctx,r.file,0,0,OP_CLOSE); close_card(ctx,installed); return -4;
         }
         r.sectors=(r.sectors+511)/512;
         for (unsigned i=0;i<FLOW_SLOTS;i++) r.positions[i]=tracks[i];
@@ -215,7 +198,9 @@ int flow_auto_paint(u32 kind,u32 pos,u32 count)
     u16 *scratch=(u16 *)((u8 *)buffer+available);
     int have_center=NATIVE_PREPARE(&window,&image,scratch);
     int drawn=0;
-    if (ok && buffer==*(u16 *volatile *)0x9fc0bf50u &&
+    int missing_side=ok && ((tracks[1] && !window.visible[0]) ||
+                            (tracks[3] && !window.visible[2]));
+    if (ok && !missing_side && buffer==*(u16 *volatile *)0x9fc0bf50u &&
         bytes==*(volatile u16 *)0x9fc0bf54u &&
         (kind==1 ? VS->magic==M3UPLAY_MAGIC && VS->pos==pos && VS->count==count :
          *(volatile u16 *)0x9fc15f24u==pos && *(volatile u16 *)0x9fc15f26u==count)) {
@@ -224,5 +209,5 @@ int flow_auto_paint(u32 kind,u32 pos,u32 count)
     if (have_center) NATIVE_FINISH(&image);
     if (kind==2 && r.file) FS(ctx,r.file,0,0,OP_CLOSE);
     close_card(ctx,installed);
-    return drawn;
+    return drawn?drawn:!ok?-5:missing_side?-8:-6;
 }
