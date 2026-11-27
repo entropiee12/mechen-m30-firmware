@@ -50,6 +50,7 @@ int save(u32 ctx,unsigned char *buf,unsigned size,int existing)
     }
     u32 h=wall_op(ctx,filename,existing?5:6,existing?2:512);
     if (!h) return 0;
+    if (existing) FS(ctx,0,0,h,11);
     for (unsigned i=size;i<512;i++) buf[i]=' ';
     buf[511]='\n';
     u32 hash=0;
