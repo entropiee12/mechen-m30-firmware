@@ -37,7 +37,7 @@ int flow_cache(struct flow_tile *slots,struct flow_window *window,const u16 trac
         if (!load(tracks[i],slots+j,ctx) || !valid(slots+j,pack,count) ||
             slots[j].track!=tracks[i]) {
             slots[j].magic=0;
-            if (i>=1 && i<=FLOW_VISIBLE) return 0;
+            if (i==FLOW_VISIBLE/2+1) return 0;
             continue;
         }
         pinned|=1u<<j;
