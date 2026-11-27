@@ -10,6 +10,9 @@ extern void run_refresh(u32);
 static u16 lcd[4096],frame[240][320];
 static unsigned failure,line,installs,mounts,opened,decodes,track,missing,preinstalled;
 static unsigned offsets[10],lookup_fail,read_fail,decode_fail,library_bad,neighbor_opens,marker_count;
+static u32 directory_state[19],cursor_state[2];
+static u32 saved_dir0,saved_cursor0;
+static unsigned snapshots,restores,offset_fail;
 static void check_line(int ok,unsigned line_number)
 {
     if(ok) return;
@@ -43,7 +46,22 @@ static u16 pixel(unsigned x,unsigned y,unsigned id)
 long SECTION(".fsmock") fs_mock(u32 ctx,u32 a,u32 b,u32 c,u32 op)
 {
     check(ctx==2 || ctx==7);
-    if(op==OP_CD) return a==':';
+    if(op==OP_OFFSET) {
+        if(offset_fail) return 0;
+        if(!c) {
+            for(unsigned i=0;i<19;i++) ((u32 *)a)[i]=directory_state[i];
+            for(unsigned i=0;i<2;i++) ((u32 *)b)[i]=cursor_state[i];
+            saved_dir0=directory_state[0];saved_cursor0=cursor_state[0];
+            snapshots++;
+        } else {
+            check(((u32 *)a)[0]==saved_dir0 && ((u32 *)b)[0]==saved_cursor0);
+            for(unsigned i=0;i<19;i++) directory_state[i]=((u32 *)a)[i];
+            for(unsigned i=0;i<2;i++) cursor_state[i]=((u32 *)b)[i];
+            restores++;
+        }
+        return 1;
+    }
+    if(op==OP_CD) { if(a==':') directory_state[0]=0;return a==':'; }
     if(op==OP_OPEN) {
         const u16 *name=(const void *)a;
         unsigned file=name[1]=='A'?8:name[1]=='N'?9:3;
@@ -90,13 +108,13 @@ u32 SECTION(".stockmock") stock_mock(void) { failure++;return 0; }
 int SECTION(".automock") lookup_mock(fs_fn fs,u32 ctx,const struct vstate *snapshot,
                                      unsigned pos,struct flow_track_location *out)
 {
-    (void)fs;check(ctx==2 && snapshot->pos==shared.pos && snapshot->count==shared.count);
+    (void)fs;check(ctx==7 && snapshot->pos==shared.pos && snapshot->count==shared.count);
     if(lookup_fail) return 0;
     clear(out,sizeof(*out));out->cursor[0]=pos;out->directory[0]=0x42;return 1;
 }
 void SECTION(".metamock") metadata_mock(u8 *descriptor)
 {
-    check(REG(u32,0x15404)==2 && REG(u32,0x15980)==2);
+    check(REG(u32,0x15404)==7 && REG(u32,0x15980)==7);
     check(shared.flow_name[0]=='N' && descriptor[0x10]==0x42);
     track=descriptor[8];check(track>=1 && track<=9);
     REG(u32,0x15418)=4;
@@ -146,11 +164,14 @@ static void reset(void)
     REG(u32,0x15404)=7;REG(u32,0x15418)=4;REG(u32,0x15420)=0x1234;
     REG(u32,0x15980)=7;REG(u32,0x15990)=0x5678;
     REG(u32,0x15820)=0x9876;
+    directory_state[0]=0xfeed;cursor_state[0]=0xbeef;
+    snapshots=restores=0;
     decodes=neighbor_opens=0;
 }
 static void restored(void)
 {
     check(!opened && !installs && !mounts);
+    check(snapshots==restores);
     check(REG(u32,0x15404)==7 && REG(u32,0x15980)==7);
     check(REG(u32,0x15820)==0x9876);
     check(REG(u32,0x15420)==0x1234 && REG(u32,0x15990)==0x5678);
@@ -197,6 +218,7 @@ void _start(void)
     /* Same low bytes, different playlist identity must invalidate old tiles. */
     shared.pl_off[7]=1;run_refresh(8);restored();check(decodes==9);
     reset();preinstalled=1;run_refresh(8);restored();check(decodes==3);preinstalled=0;
+    reset();offset_fail=1;run_refresh(8);check(decodes==0 && !snapshots && !restores);offset_fail=0;
     reset();lookup_fail=1;run_refresh(8);restored();check(decodes==0);lookup_fail=0;
     reset();missing=1;run_refresh(8);restored();check(decodes==1);missing=0;run_refresh(8);restored();check(decodes==4 && shared.native_visible);
     reset();decode_fail=1;run_refresh(8);restored();check(decodes==1 && !neighbor_opens);decode_fail=0;run_refresh(8);restored();check(decodes==4 && shared.native_visible);

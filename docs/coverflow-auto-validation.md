@@ -1,7 +1,8 @@
 # Automatic Cover Flow repair — 2026-11-27
 
 The automatic path resolves ordinary M3U entries or indexed MUSIC.LIB ranks
-using a separate card cursor. It keeps three visible tiles and two preload
+using the already mounted artwork card context, then restores its saved folder
+and file selector. It keeps three visible tiles and two preload
 slots. Stock artwork decoding creates NEIGH.PIC, while ALBUM.PIC remains the
 current cover. The side decoder requests 32 by 32 pixels; this change does not
 increase the native center artwork resolution.
@@ -35,6 +36,9 @@ increase the native center artwork resolution.
   checks that the active position, count and LCD buffer have not changed.
 - Native shuffle prediction finds the current track inside the current epoch
   before predicting forward or backward. It does not reseed or mutate playback.
+- The device showed three diagnostic marks, confirming that a second card mount
+  failed before artwork loading. The loader now borrows the stock artwork
+  context and restores its directory and selector after reading neighbors.
 
 ## Verification and limits
 
@@ -64,7 +68,7 @@ upper-left of the artwork area. Each magenta dot is one stage number:
 
 1. Display scratch capacity or pointer is unusable.
 2. Indexed queue location is unavailable.
-3. Separate card mount failed.
+3. Existing artwork card context could not be borrowed or snapshotted.
 4. MUSIC.LIB could not be opened or sized.
 5. The central tile could not be prepared (including failed lookup/decode).
 6. The song or display buffer changed before drawing, or drawing failed.
