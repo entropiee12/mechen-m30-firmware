@@ -307,7 +307,7 @@ if [ "$SD_THEME" = 1 ]; then
   "$PY" -I "$T/theme/patch_prefs.py" "$(sym prefs_music.elf apply_preferences)" \
     "$(sym prefs_setting.elf apply_preferences)" "$(sym prefs_config.elf apply_preferences)" \
     "$(sym prefs_setting.elf shuffle_off)" "$(sym prefs_setting.elf shuffle_on)"
-  "$PY" -I "$T/theme/patch_native.py" "$(sym native_setting.elf save_native)"
+  "$PY" -I "$T/theme/patch_native.py" "$(sym native_setting.elf save_native)" "$(sym native_setting.elf settings_mounted)"
   PATCHED="$PATCHED drv_ui.drv config.ap"
 fi
 if [ $LIBRARY = 1 ]; then

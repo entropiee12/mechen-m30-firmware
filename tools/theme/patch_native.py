@@ -15,6 +15,12 @@ for name, offset, bank, start in [
     assert not any(data[offset + start:offset + start + len(blob)])
     data[offset + start:offset + start + len(blob)] = blob
     if name == "setting":
+        mounted = int(sys.argv[2],16)
+        assert bank + start <= mounted < bank + start + len(blob) and mounted % 4 == 0
+        assert data[0x1836:0x183c] == bytes.fromhex("201819530065")
+        target = mounted >> 2
+        struct.pack_into("<HH",data,0x1836,0x1800 | ((target >> 21) & 31) |
+                         (((target >> 16) & 31) << 5),target & 65535)
         entry = int(sys.argv[1], 16)
         assert bank + start <= entry < bank + start + len(blob)
         # Replace only the Settings exit VM write, preserving the call arguments.

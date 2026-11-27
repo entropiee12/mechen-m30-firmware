@@ -39,7 +39,6 @@ static int number(const byte *buf,unsigned start,unsigned end)
     return value;
 }
 
-#ifndef NATIVE_EXPORT
 void import_native(byte *record,const byte *buf,unsigned size)
 {
     int changed=0;
@@ -61,7 +60,7 @@ void import_native(byte *record,const byte *buf,unsigned size)
     }
     if (changed) ((int (*)(byte *,word,word,word))0xbfc16585u)(record,0,56,19);
 }
-#else
+#ifdef NATIVE_EXPORT
 #define SYS ((int (*)(word,word,word,word))0xbfc16585u)
 #define FOLDER ((int (*)(word,const char *))FOLDER_ENTRY)
 #define READ ((int (*)(word,const char *,byte *))READ_ENTRY)
@@ -78,6 +77,17 @@ static char *numstr(char *digits,unsigned value)
         value=tens;
     } while (value);
     return p;
+}
+/* Called immediately after the stock selector publishes its mounted handle. */
+int settings_mounted(void)
+{
+    word ctx=*(volatile word *)0x9fc1550cu;
+    union { word words[128]; byte data[512]; } block;
+    if (FOLDER(ctx,"m30")) {
+        int size=READ(ctx,"settings.cfg",block.data);
+        if (size>0) import_native((byte *)0x9fc15408u,block.data,size);
+    }
+    return ((int (*)(void))0x40054c65u)();
 }
 static void export_native(word ctx,const byte *record)
 {
