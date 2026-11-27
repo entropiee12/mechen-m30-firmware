@@ -51,8 +51,9 @@ data[0x38fa:0x38fe]=bytes.fromhex('20f11922')  # beqz v0,40155370
 data[0x3b70:0x3b7a]=jal(bypass)+bytes.fromhex('00654d170065')  # nop, b 40155212, nop
 text_entry=int(sys.argv[3],16)
 assert 0x40594f90<=text_entry<0x40595400 and text_entry%4==0
-for site,pool in [(0x380a,0x3b24),(0x2789e,0x2796c),(0x27912,0x2796c),
-                  (0x2fd54,0x2fdb0),(0x32b60,0x32b90),(0x34b18,0x34c4c),(0x34bc6,0x34c4c)]:
+# This call is in the stock Now Playing painter. The six other calls once
+# hooked here belong to shared Music list/menu banks and must keep their text.
+for site,pool in [(0x380a,0x3b24)]:
     load=0xb200+((pool-((site+2)&~3))//4)
     assert data[site:site+6]==struct.pack('<HHH',0x6f03,load,0xeac0)
     assert struct.unpack_from('<I',data,pool)[0]==0xbfc16405
