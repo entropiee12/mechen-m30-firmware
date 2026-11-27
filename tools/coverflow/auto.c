@@ -3,7 +3,6 @@
 #include "m3u_queue.h"
 
 #define FS ((fs_fn)0xbfc16bb5u)
-#define SYS ((u32 (*)(u32,u32,u32,u32))0xbfc16bb1u)
 #define PREPARE ((flow_prepare)FLOW_CACHE_ENTRY)
 #define DRAW ((flow_draw)FLOW_DRAW_ENTRY)
 #define QUEUE ((void (*)(u16 *,u32,u32,u32,u32,u32,u32))FLOW_QUEUE_ENTRY)
@@ -17,32 +16,28 @@
 #define NATIVE_FINISH ((void (*)(struct native_center *))FLOW_NATIVE_FINISH_ENTRY)
 
 struct auto_reader {
-    u32 ctx,file,sectors,index_sector,first,count,source_id,budget,kind,valid,installed;
+    u32 ctx,file,sectors,index_sector,first,count,source_id,budget,kind,valid;
     u16 *work;
     u16 positions[FLOW_SLOTS];
     struct flow_track_location locations[FLOW_SLOTS];
     struct vstate snapshot;
 };
 
-static int open_card(u32 *ctx,u32 *installed)
+static int borrow_card(u32 *ctx,u32 directory[19],u32 cursor[2])
 {
-    /* The player may already have the card driver installed. A second
-     * install fails in that case, but a separate filesystem mount still
-     * gives us an independent cursor. Never uninstall another owner's driver. */
-    *installed=SYS(1,0,(u32)"card.drv",10)==0;
-    int result=(signed char)SYS(1,16,0,41);
-    if (result<0) {
-        if (*installed) SYS(1,0,0,11);
+    /* The current artwork was decoded through this mounted card context.
+     * Borrow it instead of installing/mounting a second copy of card.drv;
+     * save its directory and selector so playback resumes at the same file. */
+    u32 live=*(volatile u32 *)0x9fc15404u;
+    if (live>127 || FS(live,(u32)directory,(u32)cursor,0,OP_OFFSET)<=0)
         return 0;
-    }
-    *ctx=(u32)result;
+    *ctx=live;
     return 1;
 }
 
-static void close_card(u32 ctx,u32 installed)
+static void return_card(u32 ctx,u32 directory[19],u32 cursor[2])
 {
-    SYS(ctx,0,0,42);
-    if (installed) SYS(1,0,0,11);
+    FS(ctx,(u32)directory,(u32)cursor,1,OP_OFFSET);
 }
 
 static int read_library(void *opaque,u32 sector,u8 data[512])
@@ -158,8 +153,8 @@ int flow_auto_paint(u32 kind,u32 pos,u32 count)
         NATIVE_QUEUE(tracks,pos,count,*(volatile u8 *)0x9fc15f23u,*(volatile u8 *)0x9fc15f39u);
     }
 
-    u32 ctx,installed;
-    if (!open_card(&ctx,&installed)) return -3;
+    u32 ctx,directory[19],cursor[2];
+    if (!borrow_card(&ctx,directory,cursor)) return -3;
     struct auto_reader r;
     r.ctx=ctx;
     r.index_sector=index_sector;
@@ -179,9 +174,9 @@ int flow_auto_paint(u32 kind,u32 pos,u32 count)
     if (kind==1) copy(&r.snapshot,(const void *)VS,sizeof(r.snapshot));
     else {
         r.file=open_named(ctx,"MUSIC.LIB");
-        if (!r.file) { close_card(ctx,installed); return -4; }
+        if (!r.file) { return_card(ctx,directory,cursor); return -4; }
         if (FS(ctx,(u32)&r.sectors,r.file,0,OP_SIZE)<0) {
-            FS(ctx,r.file,0,0,OP_CLOSE); close_card(ctx,installed); return -4;
+            FS(ctx,r.file,0,0,OP_CLOSE); return_card(ctx,directory,cursor); return -4;
         }
         r.sectors=(r.sectors+511)/512;
         for (unsigned i=0;i<FLOW_SLOTS;i++) r.positions[i]=tracks[i];
@@ -208,6 +203,6 @@ int flow_auto_paint(u32 kind,u32 pos,u32 count)
     }
     if (have_center) NATIVE_FINISH(&image);
     if (kind==2 && r.file) FS(ctx,r.file,0,0,OP_CLOSE);
-    close_card(ctx,installed);
+    return_card(ctx,directory,cursor);
     return drawn?drawn:!ok?-5:missing_side?-8:-6;
 }
