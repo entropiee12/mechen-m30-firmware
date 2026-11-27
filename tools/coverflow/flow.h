@@ -22,6 +22,33 @@ struct flow_window {
     const u16 *(*native_row)(struct flow_center *,unsigned);
 };
 struct flow_region { u16 x,y,width,height; };
+
+/* Stock artwork readers and writers use this shared filename. The prepared
+ * path never changes it; ordinary neighbor decodes briefly use NEIGH.PIC so
+ * the live track's ALBUM.PIC stays untouched, even across bank reloads. */
+static inline void flow_name_album(void)
+{
+    volatile u32 *p=(volatile u32 *)VS->flow_name;
+    p[0]=0x55424c41u; p[1]=0x49502e4du; *(volatile u16 *)(p+2)='C';
+}
+static inline void flow_name_neighbor(void)
+{
+    volatile u32 *p=(volatile u32 *)VS->flow_name;
+    p[0]=0x4749454eu; p[1]=0x49502e48u; *(volatile u16 *)(p+2)='C';
+}
+
+struct native_center {
+    struct flow_center input;
+    u16 *row;
+    unsigned width,height,previous,failed;
+};
+int native_prepare(struct flow_window *window,struct native_center *image,u16 *scratch);
+void native_finish(struct native_center *image);
+
+typedef int (*flow_tile_read)(void *ctx,u32 offset,u8 data[512]);
+int flow_tile_encode(flow_tile_read read,void *ctx,struct flow_tile *tile,
+                     u16 work[32*32],u16 track,u16 count,u32 pack);
+
 typedef int (*flow_load)(u32 track,struct flow_tile *tile,void *context);
 typedef int (*flow_prepare)(struct flow_tile *slots,struct flow_window *window,
                             const u16 tracks[FLOW_SLOTS],u32 pack,u32 count,flow_load load,void *ctx);

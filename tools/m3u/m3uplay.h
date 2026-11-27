@@ -116,7 +116,10 @@ struct vstate {
     u32 flow_disabled;
     u32 native_visible;
     u32 flow_override;
+    char flow_name[12];         /* cache filename used by stock artwork I/O */
 };
+#define M3U_FLOW_NAME_ADDRESS (M3U_STATE_ADDRESS+0x170u)
+_Static_assert(__builtin_offsetof(struct vstate,flow_name)==0x170,"artwork filename offset");
 
 _Static_assert(sizeof(struct vstate)<=M3U_STATE_CAPACITY,"playlist state exceeds resident padding");
 _Static_assert(__builtin_offsetof(struct vstate,handoff)==M3U_HANDOFF_OFFSET,"handoff offset for engine trampoline");

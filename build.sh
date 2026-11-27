@@ -386,11 +386,17 @@ if [ "$COVERFLOW" = 1 ]; then flow_actions=(--flow "$(sym picker.elf flow_menu)"
 
 if [ "$COVERFLOW" = 1 ]; then
   [ "$M3UPLAY:$M3UVIS" = 1:1 ] || { echo "Cover Flow needs M3U playback and visibility"; exit 2; }
+  cp "$F/key.drv" key.drv
+  PATCHED="$PATCHED key.drv"
   blob flow_queue "$T/coverflow/queue.c" 0x403d4f10
   blob flow_cache "$T/coverflow/cache.c" 0x48514720
   blob flow_draw "$T/coverflow/render.c" 0x7829b5f0
   blob flow_native "$T/coverflow/native.c" 0x48594700 "-DFLOW_DRAW_ENTRY=(0x$(sym flow_draw.elf flow_render)|1u)"
-  blob flow_device "$T/coverflow/device.c" 0x40594fa0 "-DFLOW_NATIVE_ENTRY=(0x$(sym flow_native.elf native_cover)|1u)" "-DFLOW_QUEUE_ENTRY=(0x$(sym flow_queue.elf flow_tracks)|1u)" "-DFLOW_CACHE_ENTRY=(0x$(sym flow_cache.elf flow_cache)|1u)" "-DFLOW_DRAW_ENTRY=(0x$(sym flow_draw.elf flow_render)|1u)"
+  blob flow_library "$T/coverflow/library_queue.c" 0x40295000
+  blob flow_m3u "$T/coverflow/m3u_queue.c" 0x7189250c
+  blob flow_tile "$T/coverflow/tile.c" 0x7185250c
+  blob flow_auto "$T/coverflow/auto.c" 0x71752510 "-DFLOW_CACHE_ENTRY=(0x$(sym flow_cache.elf flow_cache)|1u)" "-DFLOW_DRAW_ENTRY=(0x$(sym flow_draw.elf flow_render)|1u)" "-DFLOW_QUEUE_ENTRY=(0x$(sym flow_queue.elf flow_tracks)|1u)" "-DFLOW_NATIVE_QUEUE_ENTRY=(0x$(sym flow_queue.elf flow_native_tracks)|1u)" "-DFLOW_LIBRARY_ENTRY=(0x$(sym flow_library.elf flow_library_window)|1u)" "-DFLOW_M3U_ENTRY=(0x$(sym flow_m3u.elf flow_m3u_track)|1u)" "-DFLOW_TILE_ENTRY=(0x$(sym flow_tile.elf flow_tile_encode)|1u)" "-DFLOW_NATIVE_PREPARE_ENTRY=(0x$(sym flow_native.elf native_prepare)|1u)" "-DFLOW_NATIVE_FINISH_ENTRY=(0x$(sym flow_native.elf native_finish)|1u)" -DFLOW_METADATA_ENTRY=0x401d51b9 -DFLOW_DECODE_ENTRY=0x480546e9
+  blob flow_device "$T/coverflow/device.c" 0x40594f90 "-DFLOW_NATIVE_ENTRY=(0x$(sym flow_native.elf native_cover)|1u)" "-DFLOW_QUEUE_ENTRY=(0x$(sym flow_queue.elf flow_tracks)|1u)" "-DFLOW_CACHE_ENTRY=(0x$(sym flow_cache.elf flow_cache)|1u)" "-DFLOW_DRAW_ENTRY=(0x$(sym flow_draw.elf flow_render)|1u)" "-DFLOW_AUTO_ENTRY=(0x$(sym flow_auto.elf flow_auto_paint)|1u)"
   "$PY" -I "$T/coverflow/patch.py" "$(sym flow_device.elf coverflow_refresh)" "$(sym flow_device.elf coverflow_bypass)" "$(sym flow_device.elf coverflow_text)" "$(sym flow_native.elf flow_scene_ui)" "$(sym flow_native.elf flow_metadata)"
 fi
 echo "== repack"
@@ -412,6 +418,7 @@ echo "   files changed from stock: $changed"
 
 if [ $TEST = 1 ]; then
   if [ "$COVERFLOW" = 1 ]; then
+    "$PY" -I "$T/coverflow/test_library_queue.py"
     CROSS="$CROSS" QEMU="$QEMU" "$PY" -I "$T/coverflow/test_packed.py" "$W"
   fi
   echo "== QEMU tests"

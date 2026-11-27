@@ -4,6 +4,7 @@
 #define STOCK_BLIT ((int (*)(void))0x4805447du)
 #define PREPARE ((flow_prepare)FLOW_CACHE_ENTRY)
 #define DRAW ((flow_draw)FLOW_DRAW_ENTRY)
+#define AUTO ((int (*)(u32,u32,u32))FLOW_AUTO_ENTRY)
 
 struct reader { u32 ctx,file,pack,count,size; int stage; };
 /* Open the pack only when the cache requests its first missing tile. */
@@ -101,10 +102,14 @@ static int paint_queue(u32 pack,u32 pos,u32 count)
 
 static void refresh(int stock_art_path)
 {
+    flow_name_album();
     int status=0;
     if (!VS->flow_disabled && VS->magic==M3UPLAY_MAGIC && VS->flow_pack)
         status=paint_queue(VS->flow_pack,VS->pos,VS->count);
     else if (!VS->flow_disabled && stock_art_path) {
+        if (VS->magic==M3UPLAY_MAGIC) status=AUTO(1,VS->pos,VS->count);
+        else status=AUTO(2,*(volatile u16 *)0x9fc15f24u,*(volatile u16 *)0x9fc15f26u);
+        if (status>0) { VS->native_visible=1; return; }
         VS->native_visible=((int (*)(void))FLOW_NATIVE_ENTRY)();
         if (VS->native_visible) return;
     }
