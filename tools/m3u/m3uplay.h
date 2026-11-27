@@ -114,7 +114,8 @@ struct vstate {
     u32 flow_pack;              /* +0x15c: prepared artwork pack, zero for ordinary playlists */
     u32 handoff;
     u32 flow_disabled;
-    u32 native_visible;                /* last playlist selection or engine mismatch */
+    u32 native_visible;
+    u32 flow_override;
 };
 
 _Static_assert(sizeof(struct vstate)<=M3U_STATE_CAPACITY,"playlist state exceeds resident padding");

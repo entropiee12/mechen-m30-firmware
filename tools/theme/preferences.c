@@ -97,8 +97,10 @@ int preferences(u32 ctx,char id[9],int *shuffle,unsigned field,const char *value
 #endif
         unsigned a,b;
 #ifdef FLOW_PREF
-        if (setting_line(buf,size,"coverflow",&a,&b)==1)
-            VS->flow_disabled=b-a==3 && buf[a]=='o' && buf[a+1]=='f' && buf[a+2]=='f';
+        if (!field && !VS->flow_override && setting_line(buf,size,"coverflow",&a,&b)==1 && b>a && buf[a]=='o') {
+            if (b-a==2 && buf[a+1]=='n') VS->flow_disabled=0;
+            if (b-a==3 && buf[a+1]=='f' && buf[a+2]=='f') VS->flow_disabled=1;
+        }
 #endif
         if (setting_line(buf,size,"theme",&a,&b)==1 && !parse_theme_id(buf+a,b-a,id)) id[0]=0;
         if (setting_line(buf,size,"shuffle",&a,&b)==1 && b-a>=2 && buf[a]=='o') {
@@ -113,9 +115,6 @@ int preferences(u32 ctx,char id[9],int *shuffle,unsigned field,const char *value
     if (size<0) goto done;
     ok=(!field && (existing || !size)) || save(ctx,buf,size,existing);
 done:
-#ifdef FLOW_PREF
-    if (field==3 && ok) {VS->flow_disabled=value[1]=='f'; VS->native_visible=0;}
-#endif
     if (!field || (field==1 && ok)) load_wall(ctx,field?value:id);
     FS(ctx,':',0,0,0);
     return ok;
