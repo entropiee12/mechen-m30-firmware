@@ -8,7 +8,7 @@ u8 hardware[0x20000] SECTION(".hardware");
 #define REG(type,offset) (*(type *)(hardware+(offset)))
 extern void run_refresh(u32);
 static u16 lcd[4096],frame[240][320];
-static unsigned failure,line,installs,mounts,opened,decodes,track,missing;
+static unsigned failure,line,installs,mounts,opened,decodes,track,missing,preinstalled;
 static unsigned offsets[10],lookup_fail,read_fail,decode_fail,library_bad,neighbor_opens;
 static void check_line(int ok,unsigned line_number)
 {
@@ -27,7 +27,7 @@ static void clear(void *p,unsigned size) { u8 *b=p;while(size--) *b++=0; }
 u32 SECTION(".sysmock") sys_mock(u32 a,u32 b,u32 c,u32 op)
 {
     (void)a;(void)b;(void)c;
-    if(op==10) installs++;
+    if(op==10) {if(preinstalled) return (u32)-1;installs++;}
     else if(op==11) installs--;
     else if(op==41) { mounts++;return 2; }
     else if(op==42) mounts--;
@@ -183,6 +183,7 @@ void _start(void)
     shared.pos=5;run_refresh(8);restored();check(decodes==6);
     /* Same low bytes, different playlist identity must invalidate old tiles. */
     shared.pl_off[7]=1;run_refresh(8);restored();check(decodes==8);
+    reset();preinstalled=1;run_refresh(8);restored();check(decodes==3);preinstalled=0;
     reset();lookup_fail=1;run_refresh(8);restored();check(decodes==0);lookup_fail=0;
     reset();missing=1;run_refresh(8);restored();check(decodes==3);missing=0;
     reset();decode_fail=1;run_refresh(8);restored();check(decodes==3 && !neighbor_opens);decode_fail=0;
