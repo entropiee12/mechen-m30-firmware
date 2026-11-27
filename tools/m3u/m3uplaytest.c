@@ -19,6 +19,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "../coverflow/m3u_queue.h"
 #include "m3uplay.h"
 
 volatile struct vstate *test_vs;
@@ -480,6 +481,18 @@ int main(void)
           && *(u16 *)(meng_eng + 0x26) == 9 && *(u16 *)(meng_eng + 0x24) == 1
           && meng_vfs.cur_entry == 16,
           "mengine set_location positions on 04 - crash.flac and sets 1/9");
+
+    /* Resolve an ordinary playlist's covers through a separate card context. */
+    struct vstate snapshot=vs;
+    snapshot.flow_pack=0;
+    struct flow_track_location location;
+    check(flow_m3u_track(mock_brow_fs,0xB1u,&snapshot,3,&location) &&
+          location.cursor[0]==17 && memcmp(location.extension,"flac",4)==0 &&
+          !flow_m3u_track(mock_brow_fs,0xB1u,&snapshot,2,&location) &&
+          flow_m3u_track(mock_brow_fs,0xB1u,&snapshot,9,&location) &&
+          location.cursor[0]==19 && meng_vfs.cur_entry==16 &&
+          vs.pos==1 && !brow_vfs.open_count,
+          "artwork lookup resolves ordinary playlist tracks without advancing playback");
 
     meng_eng[0x39] = 0; /* Repeat Off */
     meng_eng[0x23] = 0; /* Shuffle Off */

@@ -194,7 +194,8 @@ def main():
          os.path.join(HERE, "m3uplaytest.c"),
          os.path.join(HERE, "m3uplay.c"),
          os.path.join(HERE, "m3u_brow.c"),
-         os.path.join(HERE, "m3u_meng.c")], "host test compile")
+         os.path.join(HERE, "m3u_meng.c"),
+         os.path.join(HERE, "../coverflow/m3u_queue.c")], "host test compile")
     r = subprocess.run([os.path.join(work, "hosttest")], capture_output=True, timeout=60)
     out = r.stdout.decode("utf-8", "replace").splitlines()
     check(r.returncode == 0 and any("ALL PASS" in l for l in out), "all host VFS + virtual-folder + mengine scenarios passed")

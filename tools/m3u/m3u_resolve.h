@@ -23,7 +23,13 @@
 #define LINE_BUF ((char *)VS->line)
 #endif
 
-static __attribute__((noinline)) long vfs(u32 a1, u32 a2, u32 a3, u32 op)
+#ifndef M3U_LOOKUP_ARGS
+#define M3U_LOOKUP_ARGS
+#define M3U_LOOKUP_PASS
+#endif
+#define M3U_VFS(...) vfs(M3U_LOOKUP_PASS __VA_ARGS__)
+
+static __attribute__((noinline)) long vfs(M3U_LOOKUP_ARGS u32 a1, u32 a2, u32 a3, u32 op)
 {
     return FS_CALL(VFS_CTX, a1, a2, a3, op);
 }
@@ -86,7 +92,7 @@ static int name_matches(const u8 *comp, u32 clen, const u8 *nbuf, u32 got_units)
 #ifdef M3U_BROWSER
 static __attribute__((noinline)) u32 m3u_scan_ex(u8 *sec, u32 want, u32 cnt, u8 *row_out)
 #else
-static __attribute__((noinline)) u32 m3u_scan_entry(u8 *sec, u32 want)
+static __attribute__((noinline)) u32 m3u_scan_entry(M3U_LOOKUP_ARGS u8 *sec, u32 want)
 #endif
 {
     char *lbuf = LINE_BUF;
@@ -99,18 +105,18 @@ static __attribute__((noinline)) u32 m3u_scan_entry(u8 *sec, u32 want)
 #endif
     int skip = 0;
 
-    if (!vfs((u32)PL_DIR, (u32)PL_OFF, 1u, OP_OFFSET)) {
+    if (!M3U_VFS((u32)PL_DIR, (u32)PL_OFF, 1u, OP_OFFSET)) {
         return res;
     }
     /* Use the named-open form used by the stock library builder. */
-    if (!vfs((u32)sec, 255u, 0, OP_GETNAME)) {
+    if (!M3U_VFS((u32)sec, 255u, 0, OP_GETNAME)) {
         return res;
     }
-    h = vfs((u32)sec, 0, 0, OP_OPEN);
+    h = M3U_VFS((u32)sec, 0, 0, OP_OPEN);
     if (!h) {
         return res;
     }
-    vfs((u32)&fsize, (u32)h, 0, OP_SIZE);
+    M3U_VFS((u32)&fsize, (u32)h, 0, OP_SIZE);
 
     for (off = 0; off < fsize; off += 512u) {
         u32 rem = fsize - off;
@@ -118,7 +124,7 @@ static __attribute__((noinline)) u32 m3u_scan_entry(u8 *sec, u32 want)
         u32 pos = 0;
         u32 lim = (off + n >= fsize) ? (n + 1u) : n;
 
-        if (!vfs((u32)sec, 512u, (u32)h, OP_READ)) {
+        if (!M3U_VFS((u32)sec, 512u, (u32)h, OP_READ)) {
             goto out;
         }
         if (off == 0 && n >= 3 && sec[0] == 0xEFu && sec[1] == 0xBBu && sec[2] == 0xBFu) {
@@ -188,11 +194,11 @@ static __attribute__((noinline)) u32 m3u_scan_entry(u8 *sec, u32 want)
         res = idx;
     }
 out:
-    vfs((u32)h, 0, 0, OP_CLOSE);
+    M3U_VFS((u32)h, 0, 0, OP_CLOSE);
     return res;
 }
 
-static int m3u_resolve(u32 len, u32 *out_ext, u8 *out_layer)
+static int m3u_resolve(M3U_LOOKUP_ARGS u32 len, u32 *out_ext, u8 *out_layer)
 {
     u8 nbuf[NBUF_UNITS * 2];
     const u8 *local_line = (const u8 *)LINE_BUF;
@@ -201,7 +207,7 @@ static int m3u_resolve(u32 len, u32 *out_ext, u8 *out_layer)
     if (len == 0 || len >= M3U_LINE_CAP) {
         return 0;
     }
-    if (!vfs((u32)PL_DIR, (u32)PL_OFF, 1u, OP_OFFSET)) {
+    if (!M3U_VFS((u32)PL_DIR, (u32)PL_OFF, 1u, OP_OFFSET)) {
         return 0;
     }
     layer = PL_LAYER;
@@ -213,7 +219,7 @@ static int m3u_resolve(u32 len, u32 *out_ext, u8 *out_layer)
         if (i < len && (local_line[i] == '/' || local_line[i] == '\\')) {
             i++;
         }
-        vfs(':', 0, 0, OP_CD);
+        M3U_VFS(':', 0, 0, OP_CD);
         layer = 0;
     }
 
@@ -232,7 +238,7 @@ static int m3u_resolve(u32 len, u32 *out_ext, u8 *out_layer)
                 continue;
             }
             if (clen == 2 && local_line[start] == '.' && local_line[start + 1] == '.') {
-                if (layer == 0 || !((u8)vfs('|', 0, 0, OP_CD))) {
+                if (layer == 0 || !((u8)M3U_VFS('|', 0, 0, OP_CD))) {
                     return 0;
                 }
                 layer--;
@@ -250,8 +256,8 @@ static int m3u_resolve(u32 len, u32 *out_ext, u8 *out_layer)
         }
 
         cmd = DIR_HEAD;
-        while (vfs(cmd, 0, mask, OP_DIR) != 0) {
-            u32 got = (u32)vfs((u32)nbuf, NBUF_UNITS, 0, OP_GETNAME);
+        while (M3U_VFS(cmd, 0, mask, OP_DIR) != 0) {
+            u32 got = (u32)M3U_VFS((u32)nbuf, NBUF_UNITS, 0, OP_GETNAME);
             if (name_matches(&local_line[start], clen, nbuf, got)) {
                 found = 1;
                 break;
@@ -262,13 +268,13 @@ static int m3u_resolve(u32 len, u32 *out_ext, u8 *out_layer)
             return 0;
         }
         if (is_dir) {
-            if (!((u8)vfs('/', 0, 0, OP_CD))) {
+            if (!((u8)M3U_VFS('/', 0, 0, OP_CD))) {
                 return 0;
             }
             layer++;
         } else {
             *out_ext = 0;
-            vfs((u32)out_ext, 0, 0, OP_GETNAME);
+            M3U_VFS((u32)out_ext, 0, 0, OP_GETNAME);
             *out_layer = (u8)layer;
             return 1;
         }
