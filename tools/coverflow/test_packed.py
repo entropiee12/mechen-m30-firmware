@@ -11,8 +11,17 @@ CROSS = os.environ.get("CROSS", "mips64-linux-gnu-")
 QEMU = os.environ.get("QEMU", "qemu-mipsel-static")
 
 
-def run(work, pack, output=None):
+def run(work, pack, output=None, automatic=False):
     firmware = (work / "verify/fw/music.ap").read_bytes()
+    symbols = subprocess.check_output([CROSS+"nm", str(work/"flow_auto.elf")], text=True)
+    auto_entry = next(int(line.split()[0], 16) | 1
+                      for line in symbols.splitlines() if line.endswith(" flow_auto_paint"))
+    queue_symbols = subprocess.check_output([CROSS+"nm",str(work/"flow_queue.elf")],text=True)
+    native_queue = next(int(line.split()[0],16)|1 for line in queue_symbols.splitlines()
+                        if line.endswith(" flow_native_tracks"))
+    m3u_symbols = subprocess.check_output([CROSS+"nm", str(work/"flow_m3u.elf")], text=True)
+    m3u_entry = next(int(line.split()[0],16)|1 for line in m3u_symbols.splitlines()
+                     if line.endswith(" flow_m3u_track"))
     with tempfile.TemporaryDirectory() as tmp:
         tmp = Path(tmp)
         (tmp/"pack").write_bytes(pack)
@@ -21,20 +30,27 @@ def run(work, pack, output=None):
         (tmp/"skip").write_bytes(firmware[0x3b70:0x3b7a])
         sections = []
         assembly = []
-        for name, offset, addr in [
-            ("flow_native",0x2ad00,0x48594700), ("flow_device",0xb7a0,0x40594fa0), ("flow_queue",0x8710,0x403d4f10),
+        blobs = [
+            ("flow_native",0x2ad00,0x48594700), ("flow_device",0xb790,0x40594f90), ("flow_queue",0x8710,0x403d4f10),
             ("flow_cache",0x29f20,0x48514720), ("flow_draw",0x138f0,0x7829b5f0),
-        ]:
+        ]
+        if automatic:
+            blobs += [("flow_auto",0x20410,0x71752510),
+                      ("flow_library",0x6000,0x40295000),
+                      ("flow_tile",0x2240c,0x7185250c)]
+        for name, offset, addr in blobs:
             original=(work/(name+".bin")).read_bytes()
             data=firmware[offset:offset+len(original)]
             assert data==original
             # Change kernel-space globals and service pointers only. All
             # internal branches, linked addresses and the LCD renderer survive.
             for old,new in {
-                0xbfc10880:0x11000000,0xbfc16bb1:0x500000,
-                0xbfc16bb5:0x501000,0x4805447d:0x502000,
+                **{0xbfc10880+x:0x11000000+x for x in range(0x180)},
+                0xbfc16bb1:0x500000,0xbfc16bb5:0x501000,0x4805447d:0x502000,
+                **({m3u_entry:0x503000,0x401d51b9:0x504000,0x480546e9:0x505000}
+                   if automatic else {auto_entry:0x503000}),
                 **{0x9fc00000+x:0x10000000+x for x in
-                   (0xbf50,0xbf54,0xbf84,0xbf98,0x15404,0x15418,0x15b20,0x15f23,0x15f34,0x15f39)},
+                   (0xbf50,0xbf54,0xbf84,0xbf98,*range(0x15400,0x15fa4))},
             }.items():
                 data=data.replace(struct.pack("<I",old),struct.pack("<I",new))
             (tmp/name).write_bytes(data)
@@ -74,6 +90,9 @@ SECTIONS {
  .bss : { *(.bss*) *(.sbss*) }
  .sysmock 0x500000 : { *(.sysmock) } .fsmock 0x501000 : { *(.fsmock) }
  .stockmock 0x502000 : { *(.stockmock) }
+ .automock 0x503000 : { *(.automock) }
+ .metamock 0x504000 : { *(.metamock) }
+ .decodemock 0x505000 : { *(.decodemock) }
  .hardware 0x10000000 (NOLOAD) : { *(.hardware) }
  .pack 0x12000000 : { *(.pack) }
  .shared 0x11000000 (NOLOAD) : { *(.shared) }
@@ -81,18 +100,26 @@ SECTIONS {
 """+"\n".join(sections)+"\n}")
         flags=["-EL","-mabi=32","-march=mips32r2","-mno-abicalls","-fno-pic","-G0"]
         subprocess.run([CROSS+"gcc",*flags,"-mno-mips16","-mlong-calls","-Os","-ffreestanding","-fno-builtin",
-                        "-c",HERE/"harness.c","-o","test.o"],cwd=tmp,check=True)
+                        f"-DFLOW_NATIVE_TEST_ENTRY={native_queue}","-c",HERE/("harness_auto.c" if automatic else "harness.c"),"-o","test.o"],cwd=tmp,check=True)
         subprocess.run([CROSS+"gcc",*flags,"-c","banks.S","-o","banks.o"],cwd=tmp,check=True)
         subprocess.run([CROSS+"ld","-EL","-m","elf32ltsmip","-T","test.ld","-o","run","test.o","banks.o"],
                        cwd=tmp,check=True)
-        raw=subprocess.check_output([QEMU,"-cpu","24Kc","./run"],cwd=tmp,timeout=10)
-        assert len(raw)==320*240*2
+        try:
+            trace=["-d","in_asm,cpu","-D",os.environ["FLOW_QEMU_TRACE"]] if os.environ.get("FLOW_QEMU_TRACE") else []
+            raw=subprocess.check_output([QEMU,*trace,"-cpu","24Kc","./run"],cwd=tmp,timeout=10,stderr=subprocess.STDOUT)
+        except subprocess.CalledProcessError as error:
+            print(error.output.decode("latin1", errors="replace"))
+            raise
+        assert len(raw)==(0 if automatic else 320*240*2)
         if output:
             from PIL import Image
             rgb=bytearray()
             for (pixel,) in struct.iter_unpack("<H",raw):
                 rgb.extend(((pixel>>11)*255//31,((pixel>>5)&63)*255//63,(pixel&31)*255//31))
             Image.frombytes("RGB",(320,240),bytes(rgb)).save(output)
+        if automatic:
+            print("PASS: packed automatic loader, native/M3U queues, quantized neighbors, preload, failures and restoration")
+            return
         print("PASS: packed Now Playing hook, three visible covers, five-cover cache, next/back, boundaries and fallback")
 
 
@@ -116,3 +143,4 @@ if __name__=="__main__":
             parts.append(h+struct.pack("<I",checksum))
         pack=b"".join(parts)
     run(args.work,pack,args.preview)
+    run(args.work,pack,automatic=True)

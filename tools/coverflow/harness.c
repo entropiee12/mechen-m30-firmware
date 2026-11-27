@@ -91,6 +91,7 @@ long SECTION(".fsmock") fs_mock(u32 ctx,u32 a,u32 b,u32 c,u32 op)
     failure++;return 0;
 }
 u32 SECTION(".stockmock") stock_mock(void) { stock++;return 0; }
+u32 SECTION(".automock") auto_mock(u32 kind,u32 pos,u32 count) { (void)kind;(void)pos;(void)count;return 0; }
 static int region(struct flow_region *r,u32 mode)
 {
     if (!mode && r->x==0 && r->y==178 && r->width==36 && r->height==5) return 1;
