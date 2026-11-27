@@ -61,6 +61,10 @@ def main():
         assert reads[:3] == [0, album_index, album_index + 1]
         assert max(reads) < sectors
 
+        # Runtime sentinel bounds are relative to the index sector, not file start.
+        assert resolve(read, None, sectors, album_index, 255, 0xffff,
+                       positions, locations) == 0b01111
+
         # A truncated library must never read beyond its final sector.
         reads.clear()
         assert resolve(read, None, album_index + 1, album_index, 255, 258,

@@ -12,6 +12,12 @@ unsigned flow_library_window(flow_library_read read, void *ctx, u32 sectors,
 {
     union { u32 align[128]; u8 bytes[512]; } buffer;
     u8 *data=buffer.bytes;
+    /* Runtime callers may pass 0xffff: positions are already bounded by the
+     * active queue count, so stop at that rank instead of an explicit group end. */
+    if (index_end==0xffff && index_sector<sectors) {
+        u32 available=sectors-index_sector;
+        index_end=available>=256?0xffff:(u16)(available*256);
+    }
     if (!index_sector || index_sector>=sectors || index_end<=first ||
         !read(ctx,0,data) || data[0]!='M' || data[1]!='U' || data[2]!='S' ||
         data[3]!='I' || data[4]!='C' || data[510]!=0x55 || data[511]!=0xaa)

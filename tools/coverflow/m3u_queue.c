@@ -23,7 +23,10 @@ int flow_m3u_track(fs_fn fs, u32 ctx, const struct vstate *playlist,
     if (playlist->magic!=M3UPLAY_MAGIC || !position || position>playlist->count)
         return 0;
 
-    struct lookup request={.fs=fs,.ctx=ctx,.playlist=playlist};
+    struct lookup request;
+    request.fs=fs;
+    request.ctx=ctx;
+    request.playlist=playlist;
     union { u32 align[128]; u8 bytes[512]; } sector;
     u32 length=m3u_scan_entry(&request,sector.bytes,position-1);
     u32 extension;
