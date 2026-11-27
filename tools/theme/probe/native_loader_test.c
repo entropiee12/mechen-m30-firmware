@@ -29,7 +29,7 @@ static u32 FS_OP(u32 ctx,u32 a,u32 b,u32 handle,u32 op)
 {
     (void)ctx;
     char path[64];
-    if (op==5 || op==6 || op==4 || (op==0 && a=='/')) {
+    if (op==5 || op==6 || op==4 || (op==0 && a=='/' && b)) {
         const u16 *s=(const u16 *)(op?a:b);
         if (*s++!=0xfeff) abort();
         size_t i;
@@ -55,7 +55,11 @@ static u32 FS_OP(u32 ctx,u32 a,u32 b,u32 handle,u32 op)
         out[i+1]=0;
         return i+1;
     }
-    case 0: return chdir(a==':'?root:path)==0;
+    case 0:
+        if (a==':' ) return chdir(root)==0;
+        if (!b) return entry && chdir(entry->d_name)==0;
+        if (getenv("SELECTED_CD") && strcmp(path,"m30")==0) return 0;
+        return chdir(path)==0;
     case 4: return mkdir(path,0777)==0;
     case 6: if(file) abort(); file=fopen(path,"wbx"); return file!=NULL;
     case 5: if(file) abort(); file=fopen(path,b==2?"r+b":"rb"); return file!=NULL;

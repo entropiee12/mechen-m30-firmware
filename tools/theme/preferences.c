@@ -26,8 +26,14 @@ static u32 path_op(u32 ctx,const char *name,u32 op,u32 mode)
 }
 static int folder(u32 ctx,const char *name)
 {
-    FS(ctx,':',0,0,0);
-    return path_op(ctx,name,0,0);
+    if (name[0]=='m') {
+#ifdef PREF_FIXTURE
+        return settings_folder(ctx);
+#else
+        return ((int (*)(u32))FOLDER_ENTRY)(ctx);
+#endif
+    }
+    return FS(ctx,':',0,0,0) && path_op(ctx,name,0,0);
 }
 static int read_file(u32 ctx,const char *name,u8 *buf)
 {

@@ -286,10 +286,10 @@ if [ "$SD_THEME" = 1 ]; then
   blob wall_music "$T/theme/wall_load.c" 0x40354e00 -DPREF_FS=0xbfc16bb5
   blob wall_setting "$T/theme/wall_load.c" 0x40094f00 -DPREF_FS=0xbfc1658d
   blob wall_config "$T/theme/wall_load.c" 0x71252600 -DPREF_FS=0xbfc1658d -DPREF_INDEX_VM=0xbfc16585
-  blob prefs_music "$T/theme/preferences.c" 0x40654d80 $flow_pref -DPREF_FS=0xbfc16bb5 -DPREF_SYS=0xbfc16bb1 "-DWALL_ENTRY=(0x$(sym wall_music.elf load_wall)|1u)" "-DSAVE_ENTRY=(0x$(sym wall_music.elf save)|1u)"
-  blob prefs_setting "$T/theme/preferences.c" 0x40014d00 $flow_pref -DPREF_FS=0xbfc1658d -DPREF_SYS=0xbfc16585 -DPREF_SETTING "-DWALL_ENTRY=(0x$(sym wall_setting.elf load_wall)|1u)" "-DSAVE_ENTRY=(0x$(sym wall_setting.elf save)|1u)"
+  blob prefs_music "$T/theme/preferences.c" 0x40654d80 $flow_pref -DPREF_FS=0xbfc16bb5 -DPREF_SYS=0xbfc16bb1 "-DFOLDER_ENTRY=(0x$(sym wall_music.elf settings_folder)|1u)" "-DWALL_ENTRY=(0x$(sym wall_music.elf load_wall)|1u)" "-DSAVE_ENTRY=(0x$(sym wall_music.elf save)|1u)"
+  blob prefs_setting "$T/theme/preferences.c" 0x40014d00 $flow_pref -DPREF_FS=0xbfc1658d -DPREF_SYS=0xbfc16585 -DPREF_SETTING "-DFOLDER_ENTRY=(0x$(sym wall_setting.elf settings_folder)|1u)" "-DWALL_ENTRY=(0x$(sym wall_setting.elf load_wall)|1u)" "-DSAVE_ENTRY=(0x$(sym wall_setting.elf save)|1u)"
   blob native_config "$T/theme/native_settings.c" 0x71292600
-  blob prefs_config "$T/theme/preferences.c" 0x71152600 $flow_pref -DPREF_FS=0xbfc1658d -DPREF_SYS=0xbfc16585 "-DWALL_ENTRY=(0x$(sym wall_config.elf load_wall)|1u)" "-DSAVE_ENTRY=(0x$(sym wall_config.elf save)|1u)" "-DIMPORT_NATIVE=(0x$(sym native_config.elf import_native)|1u)" "-DINDEX_SYNC=(0x$(sym wall_config.elf sync_index)|1u)"
+  blob prefs_config "$T/theme/preferences.c" 0x71152600 $flow_pref -DPREF_FS=0xbfc1658d -DPREF_SYS=0xbfc16585 "-DFOLDER_ENTRY=(0x$(sym wall_config.elf settings_folder)|1u)" "-DWALL_ENTRY=(0x$(sym wall_config.elf load_wall)|1u)" "-DSAVE_ENTRY=(0x$(sym wall_config.elf save)|1u)" "-DIMPORT_NATIVE=(0x$(sym native_config.elf import_native)|1u)" "-DINDEX_SYNC=(0x$(sym wall_config.elf sync_index)|1u)"
   blob native_setting "$T/theme/native_settings.c" 0x48594700 -DNATIVE_EXPORT \
     "-DFOLDER_ENTRY=(0x$(sym prefs_setting.elf folder)|1u)" "-DREAD_ENTRY=(0x$(sym prefs_setting.elf read_file)|1u)" \
     "-DREWRITE_ENTRY=(0x$(sym prefs_setting.elf rewrite)|1u)" "-DSAVE_ENTRY=(0x$(sym wall_setting.elf save)|1u)"

@@ -14,6 +14,23 @@ static u32 wall_op(u32 ctx,const char *name,u32 op,u32 mode)
     if (op) return FS(ctx,(u32)path,mode,0,op);
     return FS(ctx,'/',(u32)path,0,0);
 }
+/* Some card drivers only support entering the selected directory entry.
+ * Try the named form first and fall back to the stock directory walk. */
+int settings_folder(u32 ctx)
+{
+    if (!FS(ctx,':',0,0,0)) return 0;
+    if (wall_op(ctx,"m30",0,0)) return 1;
+    unsigned cmd=0x82;
+    while (FS(ctx,cmd,0,1,1)) {
+        u16 name[8]={0};
+        if (FS(ctx,(u32)name,8,0,2) && name[0]==0xfeff &&
+            (name[1]|32)=='m' && name[2]=='3' && name[3]=='0' && !name[4])
+            return FS(ctx,'/',0,0,0)!=0;
+        cmd=0x80;
+    }
+    return 0;
+}
+
 void load_wall(u32 ctx,const char *id)
 {
     if (ICON_CACHE->signature!=ICON_SIGNATURE) return;
@@ -42,11 +59,10 @@ void load_wall(u32 ctx,const char *id)
 int save(u32 ctx,unsigned char *buf,unsigned size,int existing)
 {
     const char *filename="settings.cfg";
-    FS(ctx,':',0,0,0);
-    if (!wall_op(ctx,"m30",0,0)) {
+    if (!settings_folder(ctx)) {
+        if (!FS(ctx,':',0,0,0)) return 0;
         wall_op(ctx,"m30",4,0);
-        FS(ctx,':',0,0,0);
-        if (!wall_op(ctx,"m30",0,0)) return 0;
+        if (!settings_folder(ctx)) return 0;
     }
     u32 h=wall_op(ctx,filename,existing?5:6,existing?2:512);
     if (!h) return 0;

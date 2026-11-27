@@ -141,7 +141,7 @@ with tempfile.TemporaryDirectory() as temp:
     shared.unlink()
     config.unlink(missing_ok=True)
     shared.parent.rmdir()
-    edge=dict(os.environ,NO_SEEK='1',CLOSE_ZERO='1')
+    edge=dict(os.environ,NO_SEEK='1',CLOSE_ZERO='1',SELECTED_CD='1')
     subprocess.check_output([restore],cwd=card,env=edge)
     assert shared.read_bytes().startswith(b'theme=stock\n') and shared.stat().st_size==512
     subprocess.check_call([exe],cwd=card,env=dict(edge,SHUFFLE='on'))
