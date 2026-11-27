@@ -207,6 +207,16 @@ static void shuffle_history(void)
 }
 void _start(void)
 {
+#if !FLOW_LIVE_DECODE
+    for (unsigned playlist=0;playlist<2;playlist++) {
+        reset();
+        shared.magic=playlist?M3UPLAY_MAGIC:0;
+        run_refresh(8);
+        restored();
+        check(!decodes && !neighbor_opens && shared.native_visible);
+        check(frame[90][160]==51*124+62);
+    }
+#else
     shuffle_history();
     reset();run_refresh(8);restored();check(decodes==3 && shared.native_visible);
     check(frame[90][160]==51*124+62);
@@ -232,6 +242,7 @@ void _start(void)
     check(marker_count>=3);
 #else
     check(marker_count==0);
+#endif
 #endif
     register u32 v0 asm("$2")=4001;
     register u32 a0 asm("$4")=failure?1:0;
