@@ -34,8 +34,13 @@ u32 SECTION(".sysmock") sys_mock(u32 a,u32 b,u32 c,u32 op)
 long SECTION(".fsmock") fs_mock(u32 ctx,u32 a,u32 b,u32 c,u32 op)
 {
     if (ctx==7) {
-        static unsigned offset;
-        if (op==OP_CD) return a==':';
+        static unsigned offset,folder=9;
+        if (op==OP_OFFSET) {
+            if (c) folder=*(u32 *)a;
+            else { *(u32 *)a=folder; *(u32 *)b=0; }
+            return 1;
+        }
+        if (op==OP_CD) {folder=0;return a==':';}
         if (op==OP_OPEN) {check(((u16 *)a)[1]=='A');offset=0;return 8;}
         if (op==OP_CLOSE) return a==8;
         if (op==OP_SEEK) {offset=a;return 1;}

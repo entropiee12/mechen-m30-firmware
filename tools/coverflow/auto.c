@@ -19,8 +19,10 @@ struct auto_reader {
     u32 ctx,file,sectors,index_sector,first,count,source_id,budget,kind,valid;
     u16 *work;
     u16 positions[FLOW_SLOTS];
-    struct flow_track_location locations[FLOW_SLOTS];
-    struct vstate snapshot;
+    union {
+        struct flow_track_location locations[FLOW_SLOTS];
+        struct vstate snapshot;
+    };
 };
 
 static int borrow_card(u32 *ctx,u32 directory[19],u32 cursor[2])
@@ -35,9 +37,9 @@ static int borrow_card(u32 *ctx,u32 directory[19],u32 cursor[2])
     return 1;
 }
 
-static void return_card(u32 ctx,u32 directory[19],u32 cursor[2])
+static int return_card(u32 ctx,u32 directory[19],u32 cursor[2])
 {
-    FS(ctx,(u32)directory,(u32)cursor,1,OP_OFFSET);
+    return FS(ctx,(u32)directory,(u32)cursor,1,OP_OFFSET)>0;
 }
 
 static int read_library(void *opaque,u32 sector,u8 data[512])
@@ -174,9 +176,9 @@ int flow_auto_paint(u32 kind,u32 pos,u32 count)
     if (kind==1) copy(&r.snapshot,(const void *)VS,sizeof(r.snapshot));
     else {
         r.file=open_named(ctx,"MUSIC.LIB");
-        if (!r.file) { return_card(ctx,directory,cursor); return -4; }
+        if (!r.file) { return return_card(ctx,directory,cursor)?-4:-7; }
         if (FS(ctx,(u32)&r.sectors,r.file,0,OP_SIZE)<0) {
-            FS(ctx,r.file,0,0,OP_CLOSE); return_card(ctx,directory,cursor); return -4;
+            FS(ctx,r.file,0,0,OP_CLOSE); return return_card(ctx,directory,cursor)?-4:-7;
         }
         r.sectors=(r.sectors+511)/512;
         for (unsigned i=0;i<FLOW_SLOTS;i++) r.positions[i]=tracks[i];
@@ -203,6 +205,6 @@ int flow_auto_paint(u32 kind,u32 pos,u32 count)
     }
     if (have_center) NATIVE_FINISH(&image);
     if (kind==2 && r.file) FS(ctx,r.file,0,0,OP_CLOSE);
-    return_card(ctx,directory,cursor);
+    if (!return_card(ctx,directory,cursor)) return -7;
     return drawn?drawn:!ok?-5:missing_side?-8:-6;
 }

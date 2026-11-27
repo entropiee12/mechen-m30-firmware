@@ -73,8 +73,12 @@ int native_cover(int status)
     struct native_center image;
     struct flow_window window={0};
     int drawn=0;
-    if (native_prepare(&window,&image,scratch)) {
-        drawn=DRAW(&window,lcd,available);
+    u32 directory[19],cursor[2],ctx=*(volatile u32 *)0x9fc15404u;
+    if (status!=-7 && ctx<=127 && FS(ctx,(u32)directory,(u32)cursor,0,OP_OFFSET)>0) {
+        int prepared=native_prepare(&window,&image,scratch);
+        int restored=FS(ctx,(u32)directory,(u32)cursor,1,OP_OFFSET)>0;
+        if (prepared && restored)
+            drawn=DRAW(&window,lcd,available);
         native_finish(&image);
     }
     image.input.file=0;
