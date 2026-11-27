@@ -48,13 +48,12 @@ int native_cover(void)
     static const u16 name[]={0xfeff,'A','L','B','U','M','.','P','I','C',0};
     u32 file=0;
     int drawn=0;
-    if (*(volatile u32 *)0x9fc15418u&4) {
-        FS(ctx,':',0,0,OP_CD);
+    if ((*(volatile u32 *)0x9fc15418u&4) && FS(ctx,':',0,0,OP_CD)>0) {
         file=FS(ctx,(u32)name,0,0,OP_OPEN);
     }
     if (file) {
         u8 *header=(u8 *)scratch;
-        if (FS(ctx,(u32)header,30,file,OP_READ)>0 &&
+        if (FS(ctx,(u32)header,512,file,OP_READ)>0 &&
             header[16]=='O' && header[17]=='K' &&
             header[20] && header[21] && header[20]*header[21]<=22500) {
             image.input.ctx=ctx;

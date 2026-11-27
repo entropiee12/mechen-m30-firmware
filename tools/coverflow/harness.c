@@ -39,7 +39,7 @@ long SECTION(".fsmock") fs_mock(u32 ctx,u32 a,u32 b,u32 c,u32 op)
         if (op==OP_OPEN) {check(((u16 *)a)[1]=='A');offset=0;return 8;}
         if (op==OP_CLOSE) return a==8;
         if (op==OP_SEEK) {offset=a;return 1;}
-        if (op==OP_READ && !offset && b==30) {
+        if (op==OP_READ && !offset && b==512) {
             u8 *header=(u8 *)a;
             header[16]='O';header[17]='K';header[20]=124;header[21]=104;return 1;
         }
