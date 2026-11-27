@@ -391,7 +391,8 @@ if [ "$COVERFLOW" = 1 ]; then
   blob flow_queue "$T/coverflow/queue.c" 0x403d4f10
   blob flow_cache "$T/coverflow/cache.c" 0x48514720
   blob flow_draw "$T/coverflow/render.c" 0x7829b5f0
-  blob flow_native "$T/coverflow/native.c" 0x48594700 "-DFLOW_DRAW_ENTRY=(0x$(sym flow_draw.elf flow_render)|1u)"
+  flow_diag_def=; [ "${FLOW_DIAG:-0}" = 1 ] && flow_diag_def=-DFLOW_DIAG
+  blob flow_native "$T/coverflow/native.c" 0x48594700 $flow_diag_def "-DFLOW_DRAW_ENTRY=(0x$(sym flow_draw.elf flow_render)|1u)"
   blob flow_library "$T/coverflow/library_queue.c" 0x40295000
   blob flow_m3u "$T/coverflow/m3u_queue.c" 0x7189250c
   blob flow_tile "$T/coverflow/tile.c" 0x7185250c

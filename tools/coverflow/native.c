@@ -63,7 +63,7 @@ void native_finish(struct native_center *image)
     image->input.file=0;
 }
 
-int native_cover(void)
+int native_cover(int status)
 {
     u16 *lcd=*(u16 *volatile *)0x9fc0bf50u;
     unsigned capacity=*(volatile u16 *)0x9fc0bf54u;
@@ -78,7 +78,26 @@ int native_cover(void)
         native_finish(&image);
     }
     image.input.file=0;
-    return drawn || DRAW(&window,lcd,available);
+    if (!drawn) drawn=DRAW(&window,lcd,available);
+#ifdef FLOW_DIAG
+    /* Temporary on-device probe: 1..8 magenta blocks at the upper-left of
+     * the artwork area identify the automatic path's exit stage. */
+    if (status<0 && status>=-8) {
+        unsigned blocks=(unsigned)-status;
+        struct flow_region marker={0,FLOW_HEADER,blocks*4,4};
+        int (*region)(const struct flow_region *,u32)=
+            *(int (*volatile *)(const struct flow_region *,u32))0x9fc0bf98u;
+        int (*send)(u32,u32)=*(int (*volatile *)(u32,u32))0x9fc0bf84u;
+        if (region && send && region(&marker,0)) {
+            for (unsigned i=0;i<blocks*16;i++)
+                lcd[i]=(i%(blocks*4))%4==3?FLOW_BACKGROUND:0xf81f;
+            send(blocks*16,blocks*4);
+        }
+    }
+#else
+    (void)status;
+#endif
+    return drawn;
 }
 
 /* These literal pools belong to the stock Now Playing widget painters.

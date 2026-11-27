@@ -56,3 +56,21 @@ and breaks its caller was too strong. These are tagged on-demand bank addresses
 link/install mismatch is checked and repaired; physical loader behavior still
 requires hardware validation. This repair does not claim to fix settings.cfg
 persistence or implement FullSound.
+
+## Temporary on-device fallback marker
+
+Set `FLOW_DIAG=1` during a Cover Flow build to mark the fallback at the
+upper-left of the artwork area. Each magenta dot is one stage number:
+
+1. Display scratch capacity or pointer is unusable.
+2. Indexed queue location is unavailable.
+3. Separate card mount failed.
+4. MUSIC.LIB could not be opened or sized.
+5. The central tile could not be prepared (including failed lookup/decode).
+6. The song or display buffer changed before drawing, or drawing failed.
+7. Reserved for a later draw-specific result.
+8. A neighboring visible tile was missing after loading.
+
+No dots with one cover means the prepared-pack path, or a path that never
+called the automatic loader. The marker is omitted from ordinary builds.
+This diagnostic identifies a branch; it does not replace hardware verification.

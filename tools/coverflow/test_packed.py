@@ -100,7 +100,8 @@ SECTIONS {
 """+"\n".join(sections)+"\n}")
         flags=["-EL","-mabi=32","-march=mips32r2","-mno-abicalls","-fno-pic","-G0"]
         subprocess.run([CROSS+"gcc",*flags,"-mno-mips16","-mlong-calls","-Os","-ffreestanding","-fno-builtin",
-                        f"-DFLOW_NATIVE_TEST_ENTRY={native_queue}","-c",HERE/("harness_auto.c" if automatic else "harness.c"),"-o","test.o"],cwd=tmp,check=True)
+                        f"-DFLOW_NATIVE_TEST_ENTRY={native_queue}",*(["-DFLOW_DIAG_TEST"] if automatic and os.environ.get("FLOW_DIAG")=="1" else []),
+                        "-c",HERE/("harness_auto.c" if automatic else "harness.c"),"-o","test.o"],cwd=tmp,check=True)
         subprocess.run([CROSS+"gcc",*flags,"-c","banks.S","-o","banks.o"],cwd=tmp,check=True)
         subprocess.run([CROSS+"ld","-EL","-m","elf32ltsmip","-T","test.ld","-o","run","test.o","banks.o"],
                        cwd=tmp,check=True)

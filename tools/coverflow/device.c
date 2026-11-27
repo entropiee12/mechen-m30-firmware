@@ -110,7 +110,7 @@ static void refresh(int stock_art_path)
         if (VS->magic==M3UPLAY_MAGIC) status=AUTO(1,VS->pos,VS->count);
         else status=AUTO(2,*(volatile u16 *)0x9fc15f24u,*(volatile u16 *)0x9fc15f26u);
         if (status>0) { VS->native_visible=1; return; }
-        VS->native_visible=((int (*)(void))FLOW_NATIVE_ENTRY)();
+        VS->native_visible=((int (*)(int))FLOW_NATIVE_ENTRY)(status);
         if (VS->native_visible) return;
     }
     if (status>0) return;
