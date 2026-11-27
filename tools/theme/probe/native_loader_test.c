@@ -191,9 +191,15 @@ static int probe(void)
         *(u32 *)0x9fc0bfd4=7;
         struct region area={0,0,320,240};
         u32 offset=0x8e40;
-        if (!strcmp(draw,"row") || !strcmp(draw,"focus")) {
+        if (!strncmp(draw,"row",3) || !strcmp(draw,"focus")) {
             area=(struct region){5,126,310,29};
-            offset=!strcmp(draw,"row")?0xadda4:0x47090;
+            offset=0x47090;
+            if (!strncmp(draw,"row",3)) {
+                unsigned index=atoi(draw+3);
+                if (index>6) abort();
+                area.y=30+29*index;
+                offset=0xadda4+0x463c*index;
+            }
         }
         if (!strcmp(draw,"playing")) {
             const struct region bands[]={{0,0,320,28},{0,28,320,151},{0,179,320,61}};

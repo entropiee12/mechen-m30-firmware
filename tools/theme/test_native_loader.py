@@ -80,7 +80,9 @@ with tempfile.TemporaryDirectory() as temp:
     wall=draw('full')
     assert len(wall)==320*240*2
     assert len(set(zip(wall[::2],wall[1::2])))==4
-    assert draw('row')==b''.join(wall[(y*320+5)*2:(y*320+315)*2] for y in range(126,155))
+    for index in range(7):
+        top=30+29*index
+        assert draw(f'row{index}')==b''.join(wall[(y*320+5)*2:(y*320+315)*2] for y in range(top,top+29))
     style=(card/'themes/nightbay/wall.bin').read_bytes()
     assert draw('focus')==(style[8:10]*3+style[4:6]*307)*29
     assert subprocess.check_output([exe],cwd=card,env=dict(os.environ,DISCOVER='nightbay',WALL_DRAW='full'))==wall
