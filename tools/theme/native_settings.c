@@ -116,8 +116,10 @@ static void export_native(word ctx,const byte *record)
 #endif
 int save_native(byte *record,word slot,word length,word op)
 {
-    int result=SYS((word)record,slot,length,op);
     word live_context=SETTINGS_CARD_CONTEXT;
+    /* Preserve the selector's live card handle before the resident settings
+     * write can reuse shared system state. */
+    int result=SYS((word)record,slot,length,op);
     if (live_context<=127) {
         export_native(live_context,record);
         ((int (*)(word,word,word,word,word))0xbfc1658du)(live_context,':',0,0,0);
