@@ -1,0 +1,36 @@
+songs: expected 251, got 251
+header differs at offsets 0x50 0x52 0x6e 0x70
+ALLSONG: counts (0, 0, 0) sectors (0, 0, 0, 127, 128, 0)
+   order table: 251 of 251 identical
+   inverse table: 251 of 251 identical
+ALBUM: counts (1, 0, 0) sectors (129, 0, 0, 130, 131, 132)
+   level 0 nodes: 1 of 1 identical
+   order table: 251 of 251 identical
+   inverse table: 251 of 251 identical
+   node index table: 251 of 251 identical
+ARTIST: counts (1, 1, 0) sectors (133, 134, 0, 135, 136, 137)
+   got counts (2, 2, 0) sectors (133, 134, 0, 135, 136, 137)
+   level 0 nodes: 0 of 1 identical
+      first diff at node 0: expected 01020100fb0017000000ffffffffffff (251 songs, first 23 'Artist'), got 01020100fa0017000000ffffffff0100 (250 songs, first 23 'Artist')
+   level 1 nodes: 0 of 1 identical
+      first diff at node 0: expected 01010000fb001700ffff0000ffffffff (251 songs, first 23 'Artist'), got 01010000fa001700ffff0000ffff0100 (250 songs, first 23 'Artist')
+   order table: 219 of 251 identical
+      first diff at position 219: expected song 235 'Author' / 'Time Lapse.m4a', got song 236 'Artist' / 'Time Lapse.mp3'
+   inverse table: 219 of 251 identical
+      first diff at song 0 'Artist': expected 250, got 249
+   node index table: 250 of 251 identical
+      first diff at song 235 'Author': expected 0, got 1
+GENRE: counts (1, 1, 1) sectors (138, 139, 140, 141, 142, 143)
+   got counts (1, 2, 2) sectors (138, 139, 140, 141, 142, 143)
+   level 0 nodes: 0 of 1 identical
+      first diff at node 0: expected 01030100fb0017000000ffffffffffff (251 songs, first 23 ''), got 01030200fb0017000000ffffffffffff (251 songs, first 23 '')
+   level 1 nodes: 0 of 1 identical
+      first diff at node 0: expected 01020100fb00170000000000ffffffff (251 songs, first 23 ''), got 01020100fa00170000000000ffff0100 (250 songs, first 23 '')
+   level 2 nodes: 0 of 1 identical
+      first diff at node 0: expected 01010000fb001700ffff0000ffffffff (251 songs, first 23 ''), got 01010000fa001700ffff0000ffff0100 (250 songs, first 23 '')
+   order table: 219 of 251 identical
+      first diff at position 219: expected song 235 '' / 'Time Lapse.m4a', got song 236 '' / 'Time Lapse.mp3'
+   inverse table: 219 of 251 identical
+      first diff at song 0 '': expected 250, got 249
+   node index table: 250 of 251 identical
+      first diff at song 235 '': expected 0, got 1

@@ -1,0 +1,77 @@
+00 0   2f009409 bank0/win9400      EXECE_AP
+01 1   2f009579 bank0/win9400      LOAD_CODEC
+02 2   2f0096a1 bank0/win9400      LOAD_MMM
+03 3   2f009809 bank0/win9400      FREE_AP
+04 4   2f049401 bank1/win9400      FREE_CODEC
+05 5   2f0494b9 bank1/win9400      FREE_MMM
+06 6   2f0494f1 bank1/win9400      BANK_FLUSH
+07 7   2f049529 bank1/win9400      DETECT_DISK
+08 8   1f149001 bank5/win9000      DRV_INSTALL
+09 9   bfc079fd ROM                DRV_UNINSTALL
+0a 10  2f089499 bank2/win9400      GET_DRV_INSTALL_INFO
+0b 11  2f089401 bank2/win9400      REQUEST_DMA_CHAN
+0c 12  1f009001 bank0/win9000      FREE_DMA_CHAN
+0d 13  1f089001 bank2/win9000      SD_FOPEN
+0e 14  bfc04391 ROM                SD_FCLOSE
+0f 15  bfc043ad ROM                SD_FSEEK
+10 16  bfc04415 ROM                SD_FTELL
+11 17  bfc04419 ROM                SD_FREAD
+12 18  bfc19bad other(0xbfc19xxx)  VM_READ
+13 19  bfc19cbd other(0xbfc19xxx)  VM_WRITE
+14 20  1f0c9001 bank3/win9000      REQUEST_IRQ
+15 21  1f0c90ad bank3/win9000      FREE_IRQ
+16 22  bfc07bf9 ROM                MALLOC
+17 23  bfc07c75 ROM                FREE
+18 24  bfc04ce9 ROM                MQ_SEND
+19 25  bfc04d65 ROM                MQ_RECEIVE
+1a 26  bfc04de5 ROM                MQ_FLUSH
+1b 27  bfc08329 resident           GET_FW_INFO
+1c 28  bfc083fd resident           GET_AB_TIMER
+1d 29  bfc04fb9 ROM                MDELAY
+1e 30  bfc04f61 ROM                UDELAY
+1f 31  bfc04ee5 ROM                SLEEP
+20 32  bfc04f19 ROM                USLEEP
+21 33  1f0c9255 bank3/win9000      SET_IRQ_TIMER1
+22 34  1f0c92f9 bank3/win9000      DEL_IRQ_TIMER1
+23 35  bfc07a71 ROM                SET_TIME
+24 36  bfc07abd ROM                GET_TIME
+25 37  bfc07ae9 ROM                SET_DATE
+26 38  bfc07b45 ROM                GET_DATE
+27 39  1f189031 bank6/win9000      SET_ALARM_TIME
+28 40  bfc07bcd ROM                GET_ALARM_TIME
+29 41  2f189401 bank6/win9400      MOUNT_FS
+2a 42  2f189555 bank6/win9400      UNMOUNT_FS
+2b 43  bfc06515 ROM                GET_FAT_TYPE_AFTER_MOUNT
+2c 44  2f0c96fd bank3/win9400      FORMAT_DISK
+2d 45  bfc064c8 ROM                LOCAL_IRQ_SAVE
+2e 46  bfc064d4 ROM                LOCAL_IRQ_RESTORE
+2f 47  bfc05925 ROM                OS_TASK_RESUME
+30 48  bfc059b9 ROM                OS_TASK_SUSPEND
+31 49  bfc05ae5 ROM                OS_TIME_DLY
+32 50  bfc05b3d ROM                OS_TIME_DLY_RESUME
+33 51  bfc05125 ROM                OS_SCHED_LOCK
+34 52  bfc05369 ROM                OS_SCHED_UNLOCK
+35 53  bfc04ed5 ROM                RANDOM
+36 54  2f20956d bank8/win9400      SET_GWTIME
+37 55  2f20949d bank8/win9400      GET_GWTIME
+38 56  1f109001 bank4/win9000      SET_GWDATE
+39 57  1f1090a1 bank4/win9000      GET_GWDATE
+3a 58  2f1c9401 bank7/win9400      SET_VIDEO_APP
+3b 59  bfc08489 resident           GET_SYS_INFO
+3c 60  1f0490b5 bank1/win9000      REQUEST_CLKADJUST
+3d 61  1f009039 bank0/win9000      FREE_CLKADJUST
+3e 62  00000000 HOLE               ADJUST_CLK
+3f 63  bfc085b5 resident           VM_WRITE_MULTI
+40 64  bfc086c9 resident           RESERVE_7
+41 65  bfc086ed resident           RESERVE_8
+42 66  bfc08225 resident           RESERVE_9
+43 67  1f189079 bank6/win9000      -- (not in SDK enum)
+44 68  1f18911d bank6/win9000      -- (not in SDK enum)
+45 69  bfc087f1 resident           -- (not in SDK enum)
+46 70  bfc08845 resident           -- (not in SDK enum)
+47 71  1f189175 bank6/win9000      -- (not in SDK enum)
+48 72  1f1891e9 bank6/win9000      -- (not in SDK enum)
+49 73  1f189219 bank6/win9000      -- (not in SDK enum)
+4a 74  2f009945 bank0/win9400      -- (not in SDK enum)
+4b 75  bfc08771 resident           -- (not in SDK enum)
+4c 76  bfc087a5 resident           -- (not in SDK enum)

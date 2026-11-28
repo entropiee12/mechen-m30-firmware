@@ -1,0 +1,96 @@
+CURRENT STATUS — 2026-11-24
+
+Scope: mainmenu EQ navigation, decrement behavior, and save timing.
+No firmware image was changed or flashed. No commit or push was made.
+
+CONFIRMED
+
+1. The reported decrement result +1 -> -3 is a Ghidra p-code issue, not the
+   raw MIPS16 arithmetic. mainmenu.ap SHA-256:
+   1ef9b7a466a0f3a6bec8ce8654422c372fd68105ff94739077bfe34b435a1105.
+   At VA 0x401551cc / file offset 0x3fcc, bytes ff f7 1e 52 encode EXTEND
+   plus extended SLTI with signed immediate -2. The raw path clamps values
+   below -2 to -3; otherwise it subtracts one. Thus +1 becomes 0. Ghidra
+   p-code treated the immediate as unsigned and took the clamp path. A
+   diagnostic probe that corrected only that branch condition produced
+   -3,-3,-2,-1,0,1,2 for starting values -3 through +3.
+
+2. The EQ entry route is identified. State-1 selection event 0x2c03 calls
+   resident FUN_bfc165e0. It reads a u16 menu code from
+   0x9fc155d0 + 6 + 2*index. Code 3 returns 0x8505; the state dispatcher
+   maps this to state 3, the EQ type screen. State 3's 0x8506 opens the
+   Custom slider screen in state 4. manager.ap's verified name table maps
+   direct menu codes 0, 1, and 4 to music, browser, and setting; code 2 is a
+   special music launch with parameter 8; code 5 is setting with parameter 3;
+   code 6 remains conditional. Code 3 is the EQ special case, despite sharing
+   radio's app ID. The menu labels themselves remain unknown.
+
+3. config.bin SHA-256:
+   900f814711f50446802ee36bcc2d1560df55b9d2fb4e2d964bb35004517b6d19.
+   Item 0xe2 payload is [0,6,0,4,5,2,3,1]. On invalid menu-block startup,
+   default order is 0,4,5,2,3,1, so code 3 is the fifth item. Its displayed
+   localized label is unknown; a saved menu order may differ.
+
+4. Mainmenu loads its 0x38-byte settings block at entry. When the state
+   machine exits to state 0, it writes that block with
+   (0x9fc155f4, 0, 0x38, 0x13). The same exit function saves the menu-order
+   block with (0x9fc155d0, 0x10000, 0x22, 0x13), magic 0x55ab. Slider
+   confirm/cancel is not the persistent-save point. The resident service's
+   flash commit timing and power-loss behavior remain unknown.
+
+5. The address overlap is resolved: config.ap uses
+   (0x9fc155d0, ID 0x2f0000, length 4) for the indexing flag. mainmenu.ap
+   uses (0x9fc155d0, ID 0x10000, length 0x22) for menu order. These are
+   distinct persistent records in overlays that reuse RAM.
+
+6. The boot-time indexing trigger is partly proven. config.ap
+   FUN_40054ccc reads a 0x14-byte record with ID 0x20000 and magic 0x55ac.
+   If the read fails or magic is invalid, it sets the ID-0x2f0000 flag to
+   0x10000 and persists the four-byte word. Startup then launches
+   playlist.ap; playlist.ap clears the bit in its library-update
+   finalization path.
+   This explains the first index after the 0x20000 record is invalidated.
+   Why an updater invalidates it is unknown. Indexing after powered card
+   reinsertion remains unexplained because this initializer runs at boot.
+
+7. The AP-level flag users are now mapped. `usound.ap` and `udisk.ap` read
+   ID 0x2f0000; their callbacks prepare message 0x201 and return 0x861c when
+   the relevant state is set. They do not persistently write the flag.
+   `playlist.ap` clears bit 0x10000 in its update-finalization path;
+   `config.ap` is the only identified AP setter. `udisk.ap` also makes a
+   resident callback-style call `(0,0xb0,0xbfc169a1,8)` and polls event codes
+   0xb0/0xb1. The shared handler maps message 0xb0 to 0x861c; music.ap routes
+   that return to app 10 with a parameter selected by state byte 0x9fc15588:
+   state 0x10 → 0x42, 0x07 → 0x82, other → 0xc2. manager.ap confirms app 10
+   is playlist.ap, but the meanings of those parameters and whether they
+   start indexing remain unknown; only boot parameter 0x4e is verified to
+   start index update. The resident event producer and card-insertion
+   meaning also remain unknown. A later report additionally names
+   `config.ap` FUN_40054f84 and the `mainmenu.ap` resident event resolver as
+   0xb0 consumers, and reports no aligned producer in a 12-driver scan. Its
+   raw logs and hashes were not supplied, so those additions are not
+   independently verified. Driver byte hits are not writer proof.
+
+Evidence and reproduction:
+docs/evidence/mainmenu-eq-slider-pcode-2026-11-24/README.md
+Ghidra selection decompile:
+docs/evidence/mainmenu-eq-slider-pcode-2026-11-24/menu-code-3-rerun.log
+Focused summary:
+docs/mainmenu-eq-followup-status-2026-11-24.md
+
+Open: code 3's localized menu label; its relation to setting.ap's separate
+EQ list; overlay address reuse with config.ap's indexing flag; resident
+flash-save semantics; the aud_dev bank-to-file mapping and ROM dispatch
+remain unproven even though candidate bank-5 groups are now decompiled and
+p-code checked under synthetic services; playlist's `0x42/0x82/0xc2/0x4e`
+update routes are also p-code checked with controlled op-9 returns, while that
+resident method's meaning and card-event causality remain unknown; MEngine's
+initializer is independently decompiled, but its persistent-block wrapper is
+not; actual device behavior and audible DSP result.
+
+Validation: Ghidra headless decompile/disassembly and raw hash/byte reads.
+git diff --check passed. No device test or flash write was performed.
+Boot-index evidence:
+docs/evidence/index-flag-writer-2026-11-24/README.md
+AP reader/writer evidence:
+docs/evidence/index-flag-users-2026-11-24/README.md

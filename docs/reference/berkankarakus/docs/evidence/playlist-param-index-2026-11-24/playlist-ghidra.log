@@ -1,0 +1,88 @@
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/private/tmp/m30-playlist-param.BiwzYH/home
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/private/tmp/m30-playlist-param.BiwzYH/home
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/private/tmp/m30-playlist-param.BiwzYH/home
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/private/tmp/m30-playlist-param.BiwzYH/home
+openjdk version "25.0.5.0.3" 2026-10-24
+OpenJDK Runtime Environment Homebrew (build 25.0.5.0.3)
+OpenJDK 64-Bit Server VM Homebrew (build 25.0.5.0.3, mixed mode)
+INFO  Using log config file: jar:file:/opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /private/tmp/m30-playlist-param.BiwzYH/home/Library/ghidra/ghidra_12.2_PUBLIC/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /private/tmp/m30-playlist-param.BiwzYH/home/Library/ghidra/ghidra_12.2_PUBLIC/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (522 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+WARN  OS Truststore load failed: X509 trusted CA certificates not found (DefaultTrustManagerFactory)  
+INFO  Loaded 106 trusted CA certificates from the Java default trust store. (DefaultTrustManagerFactory)  
+INFO  Starting cache cleanup: /var/tmp/berkankarakus-ghidra/fscache2 (FileCacheMaintenanceDaemon)  
+INFO  Finished cache cleanup, estimated storage used: 0 (FileCacheMaintenanceDaemon)  
+ERROR Unable to write file cache maintenance file: /var/tmp/berkankarakus-ghidra/fscache2/.lastmaint (FileCacheMaintenanceDaemon) java.io.FileNotFoundException: /var/tmp/berkankarakus-ghidra/fscache2/.lastmaint (Operation not permitted)
+	at java.base/java.io.FileOutputStream.open0(Native Method)
+	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:255)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:210)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:171)
+	at java.base/java.io.FileWriter.<init>(FileWriter.java:98)
+	at utilities.util.FileUtilities.writeStringToFile(FileUtilities.java:857)
+	at ghidra.formats.gfilesystem.FileCache$FileCacheMaintenanceDaemon.run(FileCache.java:328)
+ 
+INFO  Headless startup complete (1679 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 96 extension points (47 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Decompiler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/FunctionID/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/FileFormats/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/8051/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/VersionTracking/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/BSim/ghidra_scripts
+    /Users/berkankarakus/.codex/worktrees/usound-dma-qemu/mechen-m30-firmware/tools/ghidra
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/Atmel/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Swift/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/DATA/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Debug/Debugger/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/JVM/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/PIC/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/PDB/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/BytePatterns/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/PyGhidra/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Base/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating project: /private/tmp/m30-playlist-param.BiwzYH/playlist-project/playlistparam (HeadlessAnalyzer)  
+INFO  Creating project: /private/tmp/m30-playlist-param.BiwzYH/playlist-project/playlistparam (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: /private/tmp/m30-playlist-param.BiwzYH/playlist-project/playlistparam (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///Users/berkankarakus/Projects/mechen-m30-firmware/analysis/community/fw/playlist.ap (HeadlessAnalyzer)  
+INFO  Using Loader: Raw Binary (ProgramLoader)  
+INFO  Using Language/Compiler: MIPS:LE:32:default:default (ProgramLoader)  
+INFO  Using Library Search Path: [., /System/Library/dyld/dyld_shared_cache_arm64e, /System/Library/dyld/dyld_shared_cache_x86_64, /System/Library/dyld/dyld_shared_cache_x86_64h, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64h, /Users/berkankarakus/Library/Java/Extensions, /Library/Java/Extensions, /Network/Library/Java/Extensions, /System/Library/Java/Extensions, /usr/lib/java] (ProgramLoader)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: LoadAP.java '/Users/berkankarakus/Projects/mechen-m30-firmware/analysis/community/fw/playlist.ap'  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/berkankarakus/.codex/worktrees/usound-dma-qemu/mechen-m30-firmware/tools/ghidra/LoadAP.java (HeadlessAnalyzer)  
+INFO  LoadAP.java> LoadAP: blocks=70 prologue functions=386 entry=40014c30 (GhidraScript)  
+INFO  REPORT: Execute script: DumpAt.java '0x40054c54,0x40055194,0x400551d0' '/private/tmp/m30-playlist-param.BiwzYH/playlist-functions.c'  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/berkankarakus/.codex/worktrees/usound-dma-qemu/mechen-m30-firmware/tools/ghidra/DumpAt.java (HeadlessAnalyzer)  
+INFO  DumpAt.java> DumpAt: 40054c54 -> FUN_40054c54 @ 40054c54 (GhidraScript)  
+INFO  DumpAt.java> DumpAt: 40055194 -> FUN_40055194 @ 40055194 (GhidraScript)  
+INFO  DumpAt.java> DumpAt: 400551d0 -> FUN_400551d0 @ 400551d0 (GhidraScript)  
+INFO  REPORT: Execute script: DumpWords.java '0x40054fec' '0x40055008'  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/berkankarakus/.codex/worktrees/usound-dma-qemu/mechen-m30-firmware/tools/ghidra/DumpWords.java (HeadlessAnalyzer)  
+INFO  DumpWords.java> WORD address=40054fec value=0x9fc158ce (GhidraScript)  
+INFO  DumpWords.java> WORD address=40054ff0 value=0x4005522c (GhidraScript)  
+INFO  DumpWords.java> WORD address=40054ff4 value=0x40055220 (GhidraScript)  
+INFO  DumpWords.java> WORD address=40054ff8 value=0x4005520c (GhidraScript)  
+INFO  DumpWords.java> WORD address=40054ffc value=0x7801b201 (GhidraScript)  
+INFO  DumpWords.java> WORD address=40055000 value=0x9fc15410 (GhidraScript)  
+INFO  DumpWords.java> WORD address=40055004 value=0x9fc158cd (GhidraScript)  
+INFO  REPORT: Execute script: DumpWords.java '0x40055204' '0x4005520c'  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/berkankarakus/.codex/worktrees/usound-dma-qemu/mechen-m30-firmware/tools/ghidra/DumpWords.java (HeadlessAnalyzer)  
+INFO  DumpWords.java> WORD address=40055204 value=0x40055195 (GhidraScript)  
+INFO  DumpWords.java> WORD address=40055208 value=0x400551d1 (GhidraScript)  
+INFO  /playlist.ap: file created (berkankarakus) (LocalFileSystem)  
+INFO  REPORT: Save succeeded for: /playlist.ap (playlistparam:/playlist.ap) (HeadlessAnalyzer)  
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)  

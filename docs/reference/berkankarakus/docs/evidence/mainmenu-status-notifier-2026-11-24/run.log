@@ -1,0 +1,7 @@
+STATUS NOTIFIER CASE status=0 level=0 event=0x82 tick=120
+STATUS NOTIFIER CASE status=2 level=5 refreshes=15 event=none ticks=120
+STATUS NOTIFIER CASE status=2 level=6 event=0xf2 tick=120
+STATUS NOTIFIER TRANSITIONS PASS idle_reset=1 status2_entry_reset=1 level_change_carries_timer=1
+STATUS NOTIFIER NORMALIZATION PASS status4=0:6 saved_level_cap=1
+STATUS NOTIFIER RAW LEVEL PASS sampled=7 normalized=6 refresh=none
+MAINMENU STATUS NOTIFIER P-CODE PASS timer_ticks=360 transitions=3 normalization=2 raw_level=1 instructions=66 synthetic_services=2 hardware_semantics=unmodeled

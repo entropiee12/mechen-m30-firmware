@@ -1,0 +1,11 @@
+library: 251 songs, keylen 64, tables from sector 127
+running the stock index passes
+file ops: seeks 757, reads 754 (24608 bytes), writes 1 (512 bytes), appends 17 (17 sectors)
+calls inside a sector: 753, across a 4 KB block: 0  <-- the player's kernel gets these wrong
+sector counter after the passes: 144
+MISMATCH: 1139560 bytes differ, first at 0x00000050 (sector 0)
+  got      02 00 02 00 00 00 85 00 86 00 00 00 87 00 88 00 
+  expected 01 00 01 00 00 00 85 00 86 00 00 00 87 00 88 00 
+counts: 0 0 0 1 0 0 2 2 0 1 2 2 0 0 0 0 0 0
+nodes : 0 0 0 129 0 0 133 134 0 138 139 140 0 0 0 0 0 0
+FAIL

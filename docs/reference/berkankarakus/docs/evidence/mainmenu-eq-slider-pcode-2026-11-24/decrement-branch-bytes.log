@@ -1,0 +1,133 @@
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/private/tmp/m30-eq-path.KUVbzw/home
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/private/tmp/m30-eq-path.KUVbzw/home
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/private/tmp/m30-eq-path.KUVbzw/home
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/private/tmp/m30-eq-path.KUVbzw/home
+openjdk version "25.0.5.0.3" 2026-10-24
+OpenJDK Runtime Environment Homebrew (build 25.0.5.0.3)
+OpenJDK 64-Bit Server VM Homebrew (build 25.0.5.0.3, mixed mode)
+INFO  Using log config file: jar:file:/opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /private/tmp/m30-eq-path.KUVbzw/home/Library/ghidra/ghidra_12.2_PUBLIC/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /private/tmp/m30-eq-path.KUVbzw/home/Library/ghidra/ghidra_12.2_PUBLIC/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (526 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+WARN  OS Truststore load failed: X509 trusted CA certificates not found (DefaultTrustManagerFactory)  
+INFO  Loaded 106 trusted CA certificates from the Java default trust store. (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (1869 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 96 extension points (47 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Decompiler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/FunctionID/ghidra_scripts
+    /Users/berkan/Projects/mechen-m30-firmware/tools/ghidra
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/FileFormats/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/8051/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/VersionTracking/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/BSim/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/Atmel/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Swift/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/DATA/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Debug/Debugger/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/JVM/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/PIC/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/PDB/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/BytePatterns/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/PyGhidra/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Base/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating project: /private/tmp/m30-eq-path.KUVbzw/project/raw (HeadlessAnalyzer)  
+INFO  Creating project: /private/tmp/m30-eq-path.KUVbzw/project/raw (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: /private/tmp/m30-eq-path.KUVbzw/project/raw (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///Users/berkan/Projects/m30-work/community/fw/mainmenu.ap (HeadlessAnalyzer)  
+INFO  Using Loader: Raw Binary (ProgramLoader)  
+INFO  Using Language/Compiler: MIPS:LE:32:default:default (ProgramLoader)  
+INFO  Using Library Search Path: [., /System/Library/dyld/dyld_shared_cache_arm64e, /System/Library/dyld/dyld_shared_cache_x86_64, /System/Library/dyld/dyld_shared_cache_x86_64h, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64h, /Users/berkan/Library/Java/Extensions, /Library/Java/Extensions, /Network/Library/Java/Extensions, /System/Library/Java/Extensions, /usr/lib/java] (ProgramLoader)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: LoadAP.java 'analysis/community/fw/mainmenu.ap'  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/berkan/Projects/mechen-m30-firmware/tools/ghidra/LoadAP.java (HeadlessAnalyzer)  
+INFO  LoadAP.java> LoadAP: blocks=90 prologue functions=531 entry=40014c30 (GhidraScript)  
+INFO  REPORT: Execute script: DumpInstructions.java '0x401551e0' '72'  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/berkan/Projects/mechen-m30-firmware/tools/ghidra/DumpInstructions.java (HeadlessAnalyzer)  
+INFO  DumpInstructions.java> INSN address=401551e0 bytes=44 b4 lw a0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=401551e2 bytes=62 a1 lbu v1 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=401551e4 bytes=51 67 move v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=401551e6 bytes=69 e2 addu v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=401551e8 bytes=68 82 lb v1 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=401551ea bytes=03 6a li v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=401551ec bytes=6b e2 subu v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=401551ee bytes=44 32 sll v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=401551f0 bytes=89 e2 addu v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=401551f2 bytes=40 aa lhu v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=401551f4 bytes=42 c9 sh v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=401551f6 bytes=62 a1 lbu v1 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=401551f8 bytes=51 67 move v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=401551fa bytes=71 e2 addu a0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=401551fc bytes=62 a1 lbu v1 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=401551fe bytes=51 67 move v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155200 bytes=69 e2 addu v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155202 bytes=48 a2 lbu v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155204 bytes=4f 42 addiu v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155206 bytes=48 c4 sb v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155208 bytes=39 b3 lw v1 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=4015520a bytes=42 a1 lbu v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=4015520c bytes=44 32 sll v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=4015520e bytes=69 e2 addu v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155210 bytes=40 aa lhu v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155212 bytes=62 a9 lhu v1 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155214 bytes=0d 6c li a0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155216 bytes=a2 67 move a1 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155218 bytes=c3 67 move a2 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=4015521a bytes=1f 6f li a3 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=4015521c bytes=32 b2 lw v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=4015521e bytes=c0 ea jalrc v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155220 bytes=33 b3 lw v1 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155222 bytes=42 a1 lbu v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155224 bytes=44 32 sll v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155226 bytes=69 e2 addu v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155228 bytes=a0 aa lhu a1 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=4015522a bytes=32 b4 lw a0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=4015522c bytes=62 a1 lbu v1 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=4015522e bytes=51 67 move v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155230 bytes=69 e2 addu v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155232 bytes=68 82 lb v1 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155234 bytes=03 6a li v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155236 bytes=6b e2 subu v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155238 bytes=44 32 sll v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=4015523a bytes=89 e2 addu v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=4015523c bytes=40 aa lhu v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=4015523e bytes=0a 6c li a0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155240 bytes=c2 67 move a2 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155242 bytes=1f 6f li a3 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155244 bytes=28 b2 lw v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155246 bytes=c0 ea jalrc v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155248 bytes=2a 10 b 0x4015529e (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=4015524a bytes=25 b2 lw v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=4015524c bytes=67 41 addiu v1 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=4015524e bytes=11 4b addiu v1 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155250 bytes=82 67 move a0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155252 bytes=a3 67 move a1 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155254 bytes=0c 6e li a2 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155256 bytes=00 6f li a3 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155258 bytes=22 b2 lw v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=4015525a bytes=c0 ea jalrc v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=4015525c bytes=26 b2 lw v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=4015525e bytes=07 6b li v1 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155260 bytes=79 c2 sb v1 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155262 bytes=ef f2 1b 6a li v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155266 bytes=4b ea neg v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155268 bytes=40 f0 48 c9 sh v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=4015526c bytes=18 10 b 0x4015529e (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=4015526e bytes=58 a9 lhu v0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155270 bytes=82 67 move a0 (GhidraScript)  
+INFO  DumpInstructions.java> INSN address=40155272 bytes=25 b2 lw v0 (GhidraScript)  
+INFO  /mainmenu.ap: file created (berkan) (LocalFileSystem)  
+INFO  REPORT: Save succeeded for: /mainmenu.ap (raw:/mainmenu.ap) (HeadlessAnalyzer)  
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)  

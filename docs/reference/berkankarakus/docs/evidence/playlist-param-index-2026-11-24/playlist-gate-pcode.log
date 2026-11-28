@@ -1,0 +1,6 @@
+INFO  RunPlaylistParamGateProbe.java> PLAYLIST PARAM P-CODE CASE param=0x42 op9=0 m3u-callbacks=1 music-callbacks=1 events=[resident-op9, create-file, MUSIC.LIB, finalize-file, create-file, M3U.LIB, finalize-file] (GhidraScript)  
+INFO  RunPlaylistParamGateProbe.java> PLAYLIST PARAM P-CODE CASE param=0x82 op9=not-called m3u-callbacks=0 music-callbacks=0 events=[] (GhidraScript)  
+INFO  RunPlaylistParamGateProbe.java> PLAYLIST PARAM P-CODE CASE param=0xc2 op9=0 m3u-callbacks=1 music-callbacks=1 events=[resident-op9, create-file, MUSIC.LIB, finalize-file, create-file, M3U.LIB, finalize-file] (GhidraScript)  
+INFO  RunPlaylistParamGateProbe.java> PLAYLIST PARAM P-CODE CASE param=0x4e op9=0 m3u-callbacks=1 music-callbacks=1 events=[resident-op9, create-file, MUSIC.LIB, finalize-file, create-file, M3U.LIB, finalize-file] (GhidraScript)  
+INFO  RunPlaylistParamGateProbe.java> PLAYLIST PARAM P-CODE CASE param=0x42 op9=-1 m3u-callbacks=0 music-callbacks=0 events=[resident-op9] (GhidraScript)  
+INFO  RunPlaylistParamGateProbe.java> PLAYLIST PARAM P-CODE PASS service=resident-op9-0xbfc16bb1 semantics=synthetic-return callback=synthetic-indexer (GhidraScript)  

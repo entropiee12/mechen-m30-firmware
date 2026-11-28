@@ -1,0 +1,109 @@
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/private/tmp/m30-eq-full.0hdPTW/home
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/private/tmp/m30-eq-full.0hdPTW/home
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/private/tmp/m30-eq-full.0hdPTW/home
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/private/tmp/m30-eq-full.0hdPTW/home
+openjdk version "25.0.5.0.3" 2026-10-24
+OpenJDK Runtime Environment Homebrew (build 25.0.5.0.3)
+OpenJDK 64-Bit Server VM Homebrew (build 25.0.5.0.3, mixed mode)
+INFO  Using log config file: jar:file:/opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /private/tmp/m30-eq-full.0hdPTW/home/Library/ghidra/ghidra_12.2_PUBLIC/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /private/tmp/m30-eq-full.0hdPTW/home/Library/ghidra/ghidra_12.2_PUBLIC/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (475 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+WARN  OS Truststore load failed: X509 trusted CA certificates not found (DefaultTrustManagerFactory)  
+INFO  Loaded 106 trusted CA certificates from the Java default trust store. (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (1271 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 96 extension points (47 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Decompiler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/FunctionID/ghidra_scripts
+    /Users/berkan/Projects/mechen-m30-firmware/tools/ghidra
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/FileFormats/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/8051/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/VersionTracking/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/BSim/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/Atmel/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Swift/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/DATA/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Debug/Debugger/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/JVM/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/PIC/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/PDB/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/BytePatterns/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/PyGhidra/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Base/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating project: /private/tmp/m30-eq-full.0hdPTW/project/full (HeadlessAnalyzer)  
+INFO  Creating project: /private/tmp/m30-eq-full.0hdPTW/project/full (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: /private/tmp/m30-eq-full.0hdPTW/project/full (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///Users/berkan/Projects/m30-work/community/fw/mainmenu.ap (HeadlessAnalyzer)  
+INFO  Using Loader: Raw Binary (ProgramLoader)  
+INFO  Using Language/Compiler: MIPS:LE:32:default:default (ProgramLoader)  
+INFO  Using Library Search Path: [., /System/Library/dyld/dyld_shared_cache_arm64e, /System/Library/dyld/dyld_shared_cache_x86_64, /System/Library/dyld/dyld_shared_cache_x86_64h, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64h, /Users/berkan/Library/Java/Extensions, /Library/Java/Extensions, /Network/Library/Java/Extensions, /System/Library/Java/Extensions, /usr/lib/java] (ProgramLoader)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: LoadAP.java 'analysis/community/fw/mainmenu.ap'  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/berkan/Projects/mechen-m30-firmware/tools/ghidra/LoadAP.java (HeadlessAnalyzer)  
+INFO  LoadAP.java> LoadAP: blocks=90 prologue functions=531 entry=40014c30 (GhidraScript)  
+INFO  REPORT: Execute script: DumpInstructionsFull.java '0x401551cc' '48'  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/berkan/Projects/mechen-m30-firmware/tools/ghidra/DumpInstructionsFull.java (HeadlessAnalyzer)  
+INFO  DumpInstructionsFull.java> INSN 401551cc slti v0,0xfffe (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 401551d0 bteqz 0x401551e0 (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 401551d2 lbu v1,0x2(s1) (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 401551d4 move v0,s1 (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 401551d6 addu v1,v0,v1 (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 401551d8 li v0,0x3 (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 401551da neg v0,v0 (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 401551dc sb v0,0x8(v1) (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 401551de b 0x4015529e (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 401551e0 lw a0,0x110(pc) (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 401551e2 lbu v1,0x2(s1) (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 401551e4 move v0,s1 (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 401551e6 addu v0,v0,v1 (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 401551e8 lb v1,0x8(v0) (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 401551ea li v0,0x3 (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 401551ec subu v0,v0,v1 (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 401551ee sll v0,v0,0x1 (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 401551f0 addu v0,v0,a0 (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 401551f2 lhu v0,0x0(v0) (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 401551f4 sh v0,0x4(s1) (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 401551f6 lbu v1,0x2(s1) (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 401551f8 move v0,s1 (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 401551fa addu a0,v0,v1 (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 401551fc lbu v1,0x2(s1) (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 401551fe move v0,s1 (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 40155200 addu v0,v0,v1 (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 40155202 lbu v0,0x8(v0) (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 40155204 addiu v0,v0,-0x1 (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 40155206 sb v0,0x8(a0) (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 40155208 lw v1,0xe4(pc) (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 4015520a lbu v0,0x2(s1) (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 4015520c sll v0,v0,0x1 (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 4015520e addu v0,v0,v1 (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 40155210 lhu v0,0x0(v0) (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 40155212 lhu v1,0x4(s1) (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 40155214 li a0,0xd (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 40155216 move a1,v0 (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 40155218 move a2,v1 (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 4015521a li a3,0x1f (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 4015521c lw v0,0xc8(pc) (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 4015521e jalrc v0 (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 40155220 lw v1,0xcc(pc) (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 40155222 lbu v0,0x2(s1) (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 40155224 sll v0,v0,0x1 (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 40155226 addu v0,v0,v1 (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 40155228 lhu a1,0x0(v0) (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 4015522a lw a0,0xc8(pc) (GhidraScript)  
+INFO  DumpInstructionsFull.java> INSN 4015522c lbu v1,0x2(s1) (GhidraScript)  
+INFO  /mainmenu.ap: file created (berkan) (LocalFileSystem)  
+INFO  REPORT: Save succeeded for: /mainmenu.ap (full:/mainmenu.ap) (HeadlessAnalyzer)  
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)  

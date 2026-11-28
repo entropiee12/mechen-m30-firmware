@@ -1,0 +1,113 @@
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/private/tmp/m30-index-users.IbOYZc/home-usound
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/private/tmp/m30-index-users.IbOYZc/home-usound
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/private/tmp/m30-index-users.IbOYZc/home-usound
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/private/tmp/m30-index-users.IbOYZc/home-usound
+openjdk version "25.0.5.0.3" 2026-10-24
+OpenJDK Runtime Environment Homebrew (build 25.0.5.0.3)
+OpenJDK 64-Bit Server VM Homebrew (build 25.0.5.0.3, mixed mode)
+INFO  Using log config file: jar:file:/opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /private/tmp/m30-index-users.IbOYZc/home-usound/Library/ghidra/ghidra_12.2_PUBLIC/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /private/tmp/m30-index-users.IbOYZc/home-usound/Library/ghidra/ghidra_12.2_PUBLIC/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (447 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+WARN  OS Truststore load failed: X509 trusted CA certificates not found (DefaultTrustManagerFactory)  
+INFO  Loaded 106 trusted CA certificates from the Java default trust store. (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (1231 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 96 extension points (47 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Decompiler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/FunctionID/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/FileFormats/ghidra_scripts
+    /Users/berkan/Projects/mechen-m30-firmware/tools/ghidra
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/8051/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/VersionTracking/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/BSim/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/Atmel/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Swift/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/DATA/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Debug/Debugger/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/JVM/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/PIC/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/PDB/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/BytePatterns/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/PyGhidra/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Base/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating project: /private/tmp/m30-index-users.IbOYZc/usound/project (HeadlessAnalyzer)  
+INFO  Creating project: /private/tmp/m30-index-users.IbOYZc/usound/project (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: /private/tmp/m30-index-users.IbOYZc/usound/project (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///Users/berkan/Projects/m30-work/community/fw/usound.ap (HeadlessAnalyzer)  
+INFO  Using Loader: Raw Binary (ProgramLoader)  
+INFO  Using Language/Compiler: MIPS:LE:32:default:default (ProgramLoader)  
+INFO  Using Library Search Path: [., /System/Library/dyld/dyld_shared_cache_arm64e, /System/Library/dyld/dyld_shared_cache_x86_64, /System/Library/dyld/dyld_shared_cache_x86_64h, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64h, /Users/berkan/Library/Java/Extensions, /Library/Java/Extensions, /Network/Library/Java/Extensions, /System/Library/Java/Extensions, /usr/lib/java] (ProgramLoader)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: LoadAP.java '/Users/berkan/Projects/mechen-m30-firmware/analysis/community/fw/usound.ap'  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/berkan/Projects/mechen-m30-firmware/tools/ghidra/LoadAP.java (HeadlessAnalyzer)  
+INFO  LoadAP.java> LoadAP: blocks=15 prologue functions=87 entry=40014c30 (GhidraScript)  
+INFO  REPORT: Execute script: FindImmediateAndDecompile.java '0x2f0000' '0x40054de0'  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/berkan/Projects/mechen-m30-firmware/tools/ghidra/FindImmediateAndDecompile.java (HeadlessAnalyzer)  
+INFO  FindImmediateAndDecompile.java> DECOMPILE FUN_40054de0 @ 40054de0 (GhidraScript)  
+INFO  FindImmediateAndDecompile.java> 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+undefined2 FUN_40054de0(uint param_1)
+
+{
+  undefined2 uVar1;
+  undefined4 uStack_10;
+  undefined4 uStack_c;
+  
+  uStack_10 = 0;
+  uStack_c = 0;
+  (*_UNK_40054ef4)(_UNK_40054eec,_UNK_40054ef0,4,0x12,0);
+  uStack_10 = 0x201;
+  if ((_UNK_40054efc & *_UNK_40054eec) != 0) {
+    uStack_c = uStack_c | 0x4000;
+    *_UNK_40054f00 = '\x01';
+  }
+  (*_UNK_40054ef4)(_UNK_40054eec,_UNK_40054ef0,4,0x12);
+  if (*_UNK_40054f00 == '\x01') {
+    uVar1 = 0x861c;
+    uStack_c = CONCAT22(uStack_c._2_2_,0xf0a) | 0x4000;
+    FUN_40054f08(0);
+  }
+  else {
+    uVar1 = 0x800f;
+    if ((param_1 & 0xff) == 3) {
+      if ((param_1 >> 0x10 & 0xff) == 1) {
+        uStack_c = CONCAT22(uStack_c._2_2_,0xe03);
+      }
+      else {
+        uStack_c = CONCAT22(uStack_c._2_2_,0xe03);
+      }
+    }
+    else if ((param_1 & 0xff) == 0) {
+      if ((param_1 >> 0x10 & 0xff) == 1) {
+        uStack_c = CONCAT22(uStack_c._2_2_,0x1000);
+      }
+      else {
+        uStack_c = CONCAT22(uStack_c._2_2_,0x1100);
+      }
+    }
+    else {
+      uStack_c = CONCAT22(uStack_c._2_2_,0xf09);
+    }
+  }
+  (*_UNK_40054f04)(8,&uStack_10);
+  return uVar1;
+}
+
+ (GhidraScript)  
+INFO  /usound.ap: file created (berkan) (LocalFileSystem)  
+INFO  REPORT: Save succeeded for: /usound.ap (project:/usound.ap) (HeadlessAnalyzer)  
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)  

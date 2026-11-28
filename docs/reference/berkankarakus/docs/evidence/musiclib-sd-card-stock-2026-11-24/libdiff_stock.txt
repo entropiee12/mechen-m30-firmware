@@ -1,0 +1,23 @@
+songs: expected 4000, got 4000
+header identical
+ALLSONG: counts (0, 0, 0) sectors (0, 0, 0, 2001, 2017, 0)
+   order table: 4000 of 4000 identical
+   inverse table: 4000 of 4000 identical
+ALBUM: counts (549, 0, 0) sectors (2033, 0, 0, 2051, 2067, 2083)
+   level 0 nodes: 549 of 549 identical
+   order table: 4000 of 4000 identical
+   inverse table: 4000 of 4000 identical
+   node index table: 4000 of 4000 identical
+ARTIST: counts (359, 703, 0) sectors (2099, 2111, 0, 2133, 2149, 2165)
+   level 0 nodes: 359 of 359 identical
+   level 1 nodes: 703 of 703 identical
+   order table: 4000 of 4000 identical
+   inverse table: 4000 of 4000 identical
+   node index table: 4000 of 4000 identical
+GENRE: counts (31, 436, 706) sectors (2181, 2182, 2196, 2219, 2235, 2251)
+   level 0 nodes: 31 of 31 identical
+   level 1 nodes: 436 of 436 identical
+   level 2 nodes: 706 of 706 identical
+   order table: 4000 of 4000 identical
+   inverse table: 4000 of 4000 identical
+   node index table: 4000 of 4000 identical

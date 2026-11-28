@@ -1,0 +1,383 @@
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/var/folders/zz/ybv_1f8d4r9fs71819px1zg80000gn/T//m30-music-index-return.TVw17o/home
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/var/folders/zz/ybv_1f8d4r9fs71819px1zg80000gn/T//m30-music-index-return.TVw17o/home
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/var/folders/zz/ybv_1f8d4r9fs71819px1zg80000gn/T//m30-music-index-return.TVw17o/home
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/var/folders/zz/ybv_1f8d4r9fs71819px1zg80000gn/T//m30-music-index-return.TVw17o/home
+openjdk version "25.0.5.0.3" 2026-10-24
+OpenJDK Runtime Environment Homebrew (build 25.0.5.0.3)
+OpenJDK 64-Bit Server VM Homebrew (build 25.0.5.0.3, mixed mode)
+INFO  Using log config file: jar:file:/opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)
+INFO  Using log file: /var/folders/zz/ybv_1f8d4r9fs71819px1zg80000gn/T/m30-music-index-return.TVw17o/home/Library/ghidra/ghidra_12.2_PUBLIC/application.log (LoggingInitialization)
+INFO  Loading user preferences: /var/folders/zz/ybv_1f8d4r9fs71819px1zg80000gn/T/m30-music-index-return.TVw17o/home/Library/ghidra/ghidra_12.2_PUBLIC/preferences (Preferences)
+INFO  Searching for classes... (ClassSearcher)
+INFO  Class search complete (321 ms) (ClassSearcher)
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)
+INFO  Initializing Random Number Generator... (SecureRandomFactory)
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)
+WARN  OS Truststore load failed: X509 trusted CA certificates not found (DefaultTrustManagerFactory)
+INFO  Loaded 106 trusted CA certificates from the Java default trust store. (DefaultTrustManagerFactory)
+INFO  Starting cache cleanup: /var/tmp/berkankarakus-ghidra/fscache2 (FileCacheMaintenanceDaemon)
+INFO  Finished cache cleanup, estimated storage used: 0 (FileCacheMaintenanceDaemon)
+ERROR Unable to write file cache maintenance file: /var/tmp/berkankarakus-ghidra/fscache2/.lastmaint (FileCacheMaintenanceDaemon) java.io.FileNotFoundException: /var/tmp/berkankarakus-ghidra/fscache2/.lastmaint (Operation not permitted)
+	at java.base/java.io.FileOutputStream.open0(Native Method)
+	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:255)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:210)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:171)
+	at java.base/java.io.FileWriter.<init>(FileWriter.java:98)
+	at utilities.util.FileUtilities.writeStringToFile(FileUtilities.java:857)
+	at ghidra.formats.gfilesystem.FileCache$FileCacheMaintenanceDaemon.run(FileCache.java:328)
+
+INFO  Headless startup complete (1157 ms) (AnalyzeHeadless)
+INFO  Class searcher loaded 96 extension points (47 false positives) (ClassSearcher)
+INFO  HEADLESS Script Paths:
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Decompiler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/FunctionID/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/FileFormats/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/8051/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/VersionTracking/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/BSim/ghidra_scripts
+    /Users/berkankarakus/.codex/worktrees/usound-dma-qemu/mechen-m30-firmware/tools/ghidra
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/Atmel/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Swift/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/DATA/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Debug/Debugger/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/JVM/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/PIC/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/PDB/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/BytePatterns/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/PyGhidra/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Base/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts (HeadlessAnalyzer)
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)
+INFO  Creating project: /var/folders/zz/ybv_1f8d4r9fs71819px1zg80000gn/T/m30-music-index-return.TVw17o/project/musicindexreturn (HeadlessAnalyzer)
+INFO  Creating project: /var/folders/zz/ybv_1f8d4r9fs71819px1zg80000gn/T/m30-music-index-return.TVw17o/project/musicindexreturn (DefaultProject)
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)
+INFO       project: /var/folders/zz/ybv_1f8d4r9fs71819px1zg80000gn/T/m30-music-index-return.TVw17o/project/musicindexreturn (HeadlessAnalyzer)
+INFO  IMPORTING: file:///Users/berkankarakus/Projects/mechen-m30-firmware/analysis/community/fw/music.ap (HeadlessAnalyzer)
+INFO  Using Loader: Raw Binary (ProgramLoader)
+INFO  Using Language/Compiler: MIPS:LE:32:default:default (ProgramLoader)
+INFO  Using Library Search Path: [., /System/Library/dyld/dyld_shared_cache_arm64e, /System/Library/dyld/dyld_shared_cache_x86_64, /System/Library/dyld/dyld_shared_cache_x86_64h, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64h, /Users/berkankarakus/Library/Java/Extensions, /Library/Java/Extensions, /Network/Library/Java/Extensions, /System/Library/Java/Extensions, /usr/lib/java] (ProgramLoader)
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)
+INFO  REPORT: Execute script: LoadAP.java '/Users/berkankarakus/Projects/mechen-m30-firmware/analysis/community/fw/music.ap'  (HeadlessAnalyzer)
+INFO  SCRIPT: /Users/berkankarakus/.codex/worktrees/usound-dma-qemu/mechen-m30-firmware/tools/ghidra/LoadAP.java (HeadlessAnalyzer)
+INFO  LoadAP.java> LoadAP: blocks=126 prologue functions=819 entry=40014c30 (GhidraScript)
+INFO  REPORT: Execute script: FindImmediateAndDecompile.java '0' '0x40054ff4' '0x40054d88' '0x400552a0' '0x40614fc0'  (HeadlessAnalyzer)
+INFO  SCRIPT: /Users/berkankarakus/.codex/worktrees/usound-dma-qemu/mechen-m30-firmware/tools/ghidra/FindImmediateAndDecompile.java (HeadlessAnalyzer)
+INFO  FindImmediateAndDecompile.java> DECOMPILE FUN_40054ff4 @ 40054ff4 (GhidraScript)
+INFO  FindImmediateAndDecompile.java>
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+ushort FUN_40054ff4(void)
+
+{
+  byte bVar1;
+  uint uVar2;
+  ushort uStack_28;
+  undefined1 uStack_26;
+  undefined1 uStack_25;
+
+  uStack_26 = 1;
+  uStack_25 = 0;
+  if (*_UNK_40055288 < 0x12) {
+    uVar2 = 1 << (*_UNK_40055288 & 0x1f);
+    if ((uVar2 & 0x102) != 0) {
+      *_UNK_40055278 = 1;
+      goto LAB_4005507a;
+    }
+    if ((uVar2 & 0x280) != 0) {
+      *_UNK_4005527c = 0;
+      *(undefined1 *)(_UNK_40055280 + 0xc) = 1;
+      *_UNK_40055278 = 0;
+      goto LAB_4005507a;
+    }
+    if ((_UNK_4005528c & uVar2) != 0) {
+      *_UNK_4005527c = 1;
+      *_UNK_40055278 = 0;
+      if (*(char *)(_UNK_40055284 + 0x1e) == '\x01') {
+        *_UNK_40055288 = 8;
+      }
+      goto LAB_4005507a;
+    }
+  }
+  *_UNK_40055278 = 1;
+LAB_4005507a:
+  do {
+    if (*_UNK_40055278 == 3) {
+      return uStack_28;
+    }
+    bVar1 = *_UNK_40055278;
+    if (bVar1 != 1) {
+      if (bVar1 < 2) {
+        if (bVar1 == 0) {
+          uStack_28 = FUN_40095130(*_UNK_40055288,_UNK_40055298,*_UNK_4005527c);
+          switch(uStack_28) {
+          case 0x8616:
+          case 0x861e:
+            *_UNK_40055278 = 1;
+            uStack_26 = 1;
+            break;
+          case 0x8617:
+            *_UNK_40055278 = 1;
+            uStack_26 = 0;
+            break;
+          default:
+            *_UNK_40055278 = 3;
+            break;
+          case 0x8619:
+            *_UNK_40055278 = 2;
+            uStack_25 = 0;
+            break;
+          case 0x8621:
+            *_UNK_40055278 = 2;
+            uStack_25 = 1;
+          }
+        }
+        goto LAB_4005507a;
+      }
+      if (bVar1 != 2) goto LAB_4005507a;
+      uStack_28 = FUN_40354cf8(uStack_25);
+      if (uStack_28 != 0x8616) {
+        if (uStack_28 < 0x8617) {
+          if (uStack_28 != 0x8603) {
+LAB_40055264:
+            *_UNK_40055278 = 3;
+            goto LAB_4005507a;
+          }
+        }
+        else if (uStack_28 != 0x861a) {
+          if (uStack_28 == 0x861e) goto LAB_40055258;
+          goto LAB_40055264;
+        }
+        *_UNK_40055278 = 0;
+        *_UNK_4005527c = 1;
+        goto LAB_4005507a;
+      }
+LAB_40055258:
+      *_UNK_40055278 = 1;
+      uStack_26 = 1;
+      goto LAB_4005507a;
+    }
+    uStack_28 = FUN_402550b8(uStack_26,_UNK_40055290);
+    if (uStack_28 != 0x8603) {
+      if (uStack_28 < 0x8604) {
+        if (0x8600 < uStack_28) {
+          *_UNK_40055278 = 0;
+          *_UNK_4005527c = 0;
+          if (uStack_28 == 0x8602) {
+            *_UNK_40055294 = *_UNK_40055294 | 0x20;
+          }
+          else {
+            *_UNK_40055294 = *_UNK_40055294 & 0xffffffdf;
+          }
+          *(undefined1 *)(_UNK_40055280 + 0xc) = 0;
+          *_UNK_40055294 = *_UNK_40055294 & 0xffff9fff;
+          goto LAB_4005507a;
+        }
+      }
+      else if (uStack_28 == 0x861e) {
+        *_UNK_40055278 = 1;
+        *(undefined1 *)(_UNK_40055290 + 4) = 7;
+        *(undefined1 *)(_UNK_40055298 + 4) = 7;
+        uStack_26 = 1;
+        goto LAB_4005507a;
+      }
+      *_UNK_40055278 = 3;
+      goto LAB_4005507a;
+    }
+    *_UNK_40055278 = 0;
+    *_UNK_4005527c = 1;
+  } while( true );
+}
+
+ (GhidraScript)
+INFO  FindImmediateAndDecompile.java> DECOMPILE FUN_40054d88 @ 40054d88 (GhidraScript)
+INFO  FindImmediateAndDecompile.java>
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+char FUN_40054d88(void)
+
+{
+  char cVar1;
+
+  FUN_40054c00();
+  (*_UNK_40054f20)(&UNK_40054efc,0,0,0);
+  (*_UNK_40054f20)(&UNK_40054f08,1,0,0);
+  (*_UNK_40054f24)(&UNK_40054f14);
+  (*_UNK_40054f28)(0,1);
+  (*_UNK_40054f30)(_UNK_40054f2c);
+  (*_UNK_40054f38)(_UNK_40054f34,8);
+  (*_UNK_40054f3c)();
+  (*_UNK_40054f20)(_UNK_40054f40,0,0,0x11);
+  (*_UNK_40054f20)(0xffff,0,0,0x13);
+  (*_UNK_40054f20)(0,0,0,0x14);
+  _UNK_40054f44[4] = 0x10;
+  *_UNK_40054f44 = 0;
+  cVar1 = FUN_40054f68();
+  if (cVar1 == '\x01') {
+    (*_UNK_40054f48)(_UNK_40054f44);
+    (*_UNK_40054f50)(_UNK_40054f4c,_UNK_40054f44,0xa4,0);
+  }
+  *(undefined1 *)(_UNK_40054f4c + 4) = _UNK_40054f44[4];
+  if (((*_UNK_40054f54 == '\a') || (*_UNK_40054f54 == '\r')) || (*_UNK_40054f54 == '\t')) {
+    (*_UNK_40054f5c)(_UNK_40054f4c,_UNK_40054f58,0xa4,0x12);
+    if (*_UNK_40054f54 == '\r') {
+      (*_UNK_40054f50)(_UNK_40054f60,0,4,1);
+      _UNK_40054f44[4] = 0x10;
+    }
+    (*_UNK_40054f50)(_UNK_40054f44,_UNK_40054f4c,0xa4,0);
+  }
+  else if (((*_UNK_40054f54 == '\x11') || (*_UNK_40054f54 == '\x10')) && (cVar1 == '\0')) {
+    FUN_40054d20();
+  }
+  cVar1 = FUN_40614db4(_UNK_40054f44);
+  if (cVar1 == '\x01') {
+    FUN_40694ee0();
+    *_UNK_40054f64 = *_UNK_40054f64 | 2;
+  }
+  return cVar1;
+}
+
+ (GhidraScript)
+INFO  FindImmediateAndDecompile.java> DECOMPILE FUN_400552a0 @ 400552a0 (GhidraScript)
+INFO  FindImmediateAndDecompile.java>
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+undefined2 FUN_400552a0(undefined1 param_1)
+
+{
+  int iVar1;
+  undefined2 uStack_10;
+
+  *_UNK_400552f0 = param_1;
+  iVar1 = FUN_40054d88();
+  if (iVar1 == 1) {
+    uStack_10 = FUN_40054ff4(param_1);
+  }
+  else {
+    uStack_10 = 0x8006;
+  }
+  FUN_40614fc0(uStack_10);
+  FUN_40054f80();
+  return uStack_10;
+}
+
+ (GhidraScript)
+INFO  FindImmediateAndDecompile.java> DECOMPILE FUN_40614fc0 @ 40614fc0 (GhidraScript)
+INFO  FindImmediateAndDecompile.java>
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void FUN_40614fc0(ushort param_1)
+
+{
+  undefined4 uStack_c0;
+  undefined1 uStack_bc;
+  undefined1 uStack_bb;
+  undefined1 auStack_b8 [168];
+  uint uStack_10;
+
+  uStack_10 = (uint)param_1;
+  if (uStack_10 == 0x8010) {
+    uStack_c0 = 0x201;
+    uStack_bc = 3;
+    uStack_bb = 0x10;
+    (*_UNK_40615144)(8,&uStack_c0);
+    return;
+  }
+  if (uStack_10 < 0x8011) {
+    if (uStack_10 == 0x8006) {
+      uStack_c0 = 0x201;
+      uStack_bc = 9;
+      uStack_bb = 2;
+      (*_UNK_40615144)(8,&uStack_c0);
+      return;
+    }
+    if (uStack_10 == 0x800f) {
+      uStack_c0 = 0x201;
+      uStack_bc = 3;
+      uStack_bb = 0x11;
+      (*_UNK_40615144)(8,&uStack_c0);
+      return;
+    }
+  }
+  else {
+    if (uStack_10 == 0x861c) {
+      uStack_c0 = 0x201;
+      uStack_bc = 10;
+      if (*(char *)(_UNK_40615148 + 4) == '\x10') {
+        uStack_bb = 0x42;
+      }
+      else if (*(char *)(_UNK_40615148 + 4) == '\a') {
+        uStack_bb = 0x82;
+      }
+      else {
+        uStack_bb = 0xc2;
+      }
+      (*_UNK_40615144)(8,&uStack_c0);
+      (*_UNK_40615150)(auStack_b8,_UNK_4061514c,0xa8,0x12);
+      (*_UNK_40615158)(auStack_b8,_UNK_40615154,0xa4,0);
+      *_UNK_40615154 = 0;
+      (*_UNK_40615150)(auStack_b8,_UNK_4061514c,0xa8,0x13);
+      return;
+    }
+    if (uStack_10 < 0x861d) {
+      if (uStack_10 == 0x8015) {
+        return;
+      }
+    }
+    else if (uStack_10 == 0x8d03) {
+      uStack_c0 = 0x201;
+      uStack_bc = 1;
+      uStack_bb = 2;
+      (*_UNK_40615144)(8,&uStack_c0);
+      return;
+    }
+  }
+  uStack_c0 = 0x201;
+  uStack_bc = 9;
+  uStack_bb = 2;
+  (*_UNK_40615144)(8,&uStack_c0);
+  return;
+}
+
+ (GhidraScript)
+INFO  REPORT: Execute script: DumpWords.java '0x40054f40' '0x40054f68'  (HeadlessAnalyzer)
+INFO  SCRIPT: /Users/berkankarakus/.codex/worktrees/usound-dma-qemu/mechen-m30-firmware/tools/ghidra/DumpWords.java (HeadlessAnalyzer)
+INFO  DumpWords.java> WORD address=40054f40 value=0x9fc1573c (GhidraScript)
+INFO  DumpWords.java> WORD address=40054f44 value=0x9fc15584 (GhidraScript)
+INFO  DumpWords.java> WORD address=40054f48 value=0xbfc16459 (GhidraScript)
+INFO  DumpWords.java> WORD address=40054f4c value=0x9fc15628 (GhidraScript)
+INFO  DumpWords.java> WORD address=40054f50 value=0xbfc16401 (GhidraScript)
+INFO  DumpWords.java> WORD address=40054f54 value=0x9fc15436 (GhidraScript)
+INFO  DumpWords.java> WORD address=40054f58 value=0x00070000 (GhidraScript)
+INFO  DumpWords.java> WORD address=40054f5c value=0xbfc16bb1 (GhidraScript)
+INFO  DumpWords.java> WORD address=40054f60 value=0x9fc15630 (GhidraScript)
+INFO  DumpWords.java> WORD address=40054f64 value=0x9fc15418 (GhidraScript)
+INFO  REPORT: Execute script: DumpWords.java '0x40055278' '0x400552a0'  (HeadlessAnalyzer)
+INFO  SCRIPT: /Users/berkankarakus/.codex/worktrees/usound-dma-qemu/mechen-m30-firmware/tools/ghidra/DumpWords.java (HeadlessAnalyzer)
+INFO  DumpWords.java> WORD address=40055278 value=0x9fc15435 (GhidraScript)
+INFO  DumpWords.java> WORD address=4005527c value=0x9fc15437 (GhidraScript)
+INFO  DumpWords.java> WORD address=40055280 value=0x9fc156e0 (GhidraScript)
+INFO  DumpWords.java> WORD address=40055284 value=0x9fc156f4 (GhidraScript)
+INFO  DumpWords.java> WORD address=40055288 value=0x9fc15436 (GhidraScript)
+INFO  DumpWords.java> WORD address=4005528c value=0x00030000 (GhidraScript)
+INFO  DumpWords.java> WORD address=40055290 value=0x9fc15628 (GhidraScript)
+INFO  DumpWords.java> WORD address=40055294 value=0x9fc15418 (GhidraScript)
+INFO  DumpWords.java> WORD address=40055298 value=0x9fc15584 (GhidraScript)
+INFO  DumpWords.java> WORD address=4005529c value=0x400551ac (GhidraScript)
+INFO  REPORT: Execute script: DumpWords.java '0x40615140' '0x40615160'  (HeadlessAnalyzer)
+INFO  SCRIPT: /Users/berkankarakus/.codex/worktrees/usound-dma-qemu/mechen-m30-firmware/tools/ghidra/DumpWords.java (HeadlessAnalyzer)
+INFO  DumpWords.java> WORD address=40615140 value=0x0000e8a0 (GhidraScript)
+INFO  DumpWords.java> WORD address=40615144 value=0x48494759 (GhidraScript)
+INFO  DumpWords.java> WORD address=40615148 value=0x9fc15584 (GhidraScript)
+INFO  DumpWords.java> WORD address=4061514c value=0x00070000 (GhidraScript)
+INFO  DumpWords.java> WORD address=40615150 value=0xbfc16bb1 (GhidraScript)
+INFO  DumpWords.java> WORD address=40615154 value=0x9fc15628 (GhidraScript)
+INFO  DumpWords.java> WORD address=40615158 value=0xbfc16401 (GhidraScript)
+INFO  DumpWords.java> WORD address=4061515c value=0x00000000 (GhidraScript)
+INFO  /music.ap: file created (berkankarakus) (LocalFileSystem)
+INFO  REPORT: Save succeeded for: /music.ap (musicindexreturn:/music.ap) (HeadlessAnalyzer)
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)

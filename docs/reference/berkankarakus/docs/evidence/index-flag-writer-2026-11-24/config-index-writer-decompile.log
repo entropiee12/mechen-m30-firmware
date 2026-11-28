@@ -1,0 +1,169 @@
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/private/tmp/m30-index-flag.y30ouH/home
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/private/tmp/m30-index-flag.y30ouH/home
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/private/tmp/m30-index-flag.y30ouH/home
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/private/tmp/m30-index-flag.y30ouH/home
+openjdk version "25.0.5.0.3" 2026-10-24
+OpenJDK Runtime Environment Homebrew (build 25.0.5.0.3)
+OpenJDK 64-Bit Server VM Homebrew (build 25.0.5.0.3, mixed mode)
+INFO  Using log config file: jar:file:/opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /private/tmp/m30-index-flag.y30ouH/home/Library/ghidra/ghidra_12.2_PUBLIC/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /private/tmp/m30-index-flag.y30ouH/home/Library/ghidra/ghidra_12.2_PUBLIC/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (478 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+WARN  OS Truststore load failed: X509 trusted CA certificates not found (DefaultTrustManagerFactory)  
+INFO  Loaded 106 trusted CA certificates from the Java default trust store. (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (1369 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 96 extension points (47 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Decompiler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/FunctionID/ghidra_scripts
+    /Users/berkan/Projects/mechen-m30-firmware/tools/ghidra
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/FileFormats/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/8051/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/VersionTracking/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/BSim/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/Atmel/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Swift/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/DATA/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Debug/Debugger/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/JVM/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/PIC/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/PDB/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/BytePatterns/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/PyGhidra/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Base/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating project: /private/tmp/m30-index-flag.y30ouH/project/indexflag (HeadlessAnalyzer)  
+INFO  Creating project: /private/tmp/m30-index-flag.y30ouH/project/indexflag (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: /private/tmp/m30-index-flag.y30ouH/project/indexflag (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///Users/berkan/Projects/m30-work/community/fw/config.ap (HeadlessAnalyzer)  
+INFO  Using Loader: Raw Binary (ProgramLoader)  
+INFO  Using Language/Compiler: MIPS:LE:32:default:default (ProgramLoader)  
+INFO  Using Library Search Path: [., /System/Library/dyld/dyld_shared_cache_arm64e, /System/Library/dyld/dyld_shared_cache_x86_64, /System/Library/dyld/dyld_shared_cache_x86_64h, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64h, /Users/berkan/Library/Java/Extensions, /Library/Java/Extensions, /Network/Library/Java/Extensions, /System/Library/Java/Extensions, /usr/lib/java] (ProgramLoader)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: LoadAP.java 'analysis/community/fw/config.ap'  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/berkan/Projects/mechen-m30-firmware/tools/ghidra/LoadAP.java (HeadlessAnalyzer)  
+INFO  LoadAP.java> LoadAP: blocks=59 prologue functions=342 entry=40014c30 (GhidraScript)  
+INFO  REPORT: Execute script: FindImmediateAndDecompile.java '0' '0x40054ccc' '0x40054c00'  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/berkan/Projects/mechen-m30-firmware/tools/ghidra/FindImmediateAndDecompile.java (HeadlessAnalyzer)  
+INFO  FindImmediateAndDecompile.java> DECOMPILE FUN_40054ccc @ 40054ccc (GhidraScript)  
+INFO  FindImmediateAndDecompile.java> 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void FUN_40054ccc(void)
+
+{
+  int *piVar1;
+  undefined1 *puVar2;
+  undefined1 uVar3;
+  uint uVar4;
+  byte bStack_30;
+  undefined1 auStack_28 [16];
+  int iStack_18;
+  
+  iStack_18 = (*_UNK_40054e98)(_UNK_40054e94,0,0x38,0x12);
+  if ((*_UNK_40054e94 != 0x55aa) || (iStack_18 != 0)) {
+    (*_UNK_40054e9c)(_UNK_40054e94,0,0x38,1);
+    *_UNK_40054e94 = 0x55aa;
+    (*_UNK_40054ea0)(_UNK_40054e94);
+    (*_UNK_40054e98)(_UNK_40054e94,0,0x38,0x13);
+  }
+  (*_UNK_40054ea4)(_UNK_40054e94);
+  iStack_18 = (*_UNK_40054e98)(_UNK_40054ea8,_UNK_40054eac,0xf0,0x12);
+  if ((*_UNK_40054ea8 != 0x55b9) || (iStack_18 != 0)) {
+    (*_UNK_40054e9c)(_UNK_40054ea8,0,0xf0,1);
+    *_UNK_40054ea8 = 0x55b9;
+    (*_UNK_40054eb0)(_UNK_40054ea8);
+    (*_UNK_40054e98)(_UNK_40054ea8,_UNK_40054eac,0xf0,0x13);
+  }
+  piVar1 = _UNK_40054eb4;
+  uVar4 = (*_UNK_40054eb8)(0xe1);
+  *piVar1 = (uVar4 & 0xff) << 0x14;
+  puVar2 = _UNK_40054ebc;
+  uVar3 = (*_UNK_40054eb8)(0x116);
+  *puVar2 = uVar3;
+  (*_UNK_40054e98)(_UNK_40054ec0,_UNK_40054ec4,4,0x12);
+  iStack_18 = (*_UNK_40054e98)(_UNK_40054ec8,_UNK_40054ecc,0x14,0x12);
+  if ((*_UNK_40054ec8 != 0x55ac) || (iStack_18 != 0)) {
+    *_UNK_40054ec0 = _UNK_40054ed0;
+    (*_UNK_40054e98)(_UNK_40054ec0,_UNK_40054ec4,4,0x13);
+    *_UNK_40054ec8 = 0x55ac;
+    *(undefined1 *)(_UNK_40054ec8 + 1) = 9;
+    (*_UNK_40054ed8)(0,_UNK_40054ed4,0x24);
+    for (bStack_30 = 0; (ushort)bStack_30 < *(ushort *)(_UNK_40054ed4 + 2);
+        bStack_30 = bStack_30 + 1) {
+      *(char *)((int)_UNK_40054ec8 + bStack_30 + 4) =
+           (char)*(undefined2 *)((uint)bStack_30 * 2 + _UNK_40054ed4 + 4);
+    }
+    (*_UNK_40054e98)(_UNK_40054ec8,_UNK_40054ecc,0x14,0x13);
+    (*_UNK_40054e9c)(auStack_28,0,0xe,1);
+    (*_UNK_40054e98)(auStack_28,_UNK_40054edc,0xe,0x13);
+  }
+  (*_UNK_40054e98)(_UNK_40054ee0,_UNK_40054ee4,0x78,0x12);
+  *(undefined1 *)(_UNK_40054ee8 + 9) = 0;
+  *(undefined1 *)(_UNK_40054ee8 + 0x17) = *(undefined1 *)((int)_UNK_40054e94 + 0x1f);
+  (*_UNK_40054e9c)(_UNK_40054eec,_UNK_40054ef0,7,0);
+  return;
+}
+
+ (GhidraScript)  
+INFO  FindImmediateAndDecompile.java> DECOMPILE FUN_40054c00 @ 40054c00 (GhidraScript)  
+INFO  FindImmediateAndDecompile.java> 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+short FUN_40054c00(int *param_1)
+
+{
+  short sStack_20;
+  undefined4 uStack_18;
+  undefined1 uStack_14;
+  undefined1 uStack_13;
+  int iStack_10;
+  
+  sStack_20 = 0;
+  iStack_10 = *param_1;
+  if (iStack_10 == 0x90) {
+    *(undefined2 *)(_UNK_40054cb4 + 8) = 0;
+    sStack_20 = (*_UNK_40054cb8)();
+    if (sStack_20 == -0x7fea) {
+      if (*_UNK_40054cbc == '\x01') {
+        uStack_14 = 0x12;
+      }
+      else if (*(char *)(_UNK_40054cc0 + 0xf) == '\0') {
+        uStack_14 = 0xc;
+      }
+      else {
+        uStack_14 = 0x10;
+      }
+      uStack_18 = 0x201;
+      uStack_13 = 1;
+      (*_UNK_40054cc4)(8,&uStack_18);
+      sStack_20 = -0x7feb;
+    }
+  }
+  else if (iStack_10 == 0x91) {
+    if (*_UNK_40054cc8 == '\x01') {
+      sStack_20 = -0x7fe8;
+    }
+    *(undefined2 *)(_UNK_40054cb4 + 6) = 100;
+  }
+  else {
+    sStack_20 = FUN_400950dc(param_1);
+  }
+  return sStack_20;
+}
+
+ (GhidraScript)  
+INFO  /config.ap: file created (berkan) (LocalFileSystem)  
+INFO  REPORT: Save succeeded for: /config.ap (indexflag:/config.ap) (HeadlessAnalyzer)  
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)  

@@ -1,0 +1,136 @@
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/var/folders/z5/8_bkq24n7m7cbt9y2ynl9yqc0000gp/T//m30-mainmenu-eq-slider.XyrX50/home
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/var/folders/z5/8_bkq24n7m7cbt9y2ynl9yqc0000gp/T//m30-mainmenu-eq-slider.XyrX50/home
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/var/folders/z5/8_bkq24n7m7cbt9y2ynl9yqc0000gp/T//m30-mainmenu-eq-slider.XyrX50/home
+Picked up JAVA_TOOL_OPTIONS: -Duser.home=/var/folders/z5/8_bkq24n7m7cbt9y2ynl9yqc0000gp/T//m30-mainmenu-eq-slider.XyrX50/home
+openjdk version "25.0.5.0.3" 2026-10-24
+OpenJDK Runtime Environment Homebrew (build 25.0.5.0.3)
+OpenJDK 64-Bit Server VM Homebrew (build 25.0.5.0.3, mixed mode)
+INFO  Using log config file: jar:file:/opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /var/folders/z5/8_bkq24n7m7cbt9y2ynl9yqc0000gp/T/m30-mainmenu-eq-slider.XyrX50/home/Library/ghidra/ghidra_12.2_PUBLIC/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /var/folders/z5/8_bkq24n7m7cbt9y2ynl9yqc0000gp/T/m30-mainmenu-eq-slider.XyrX50/home/Library/ghidra/ghidra_12.2_PUBLIC/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (479 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+WARN  OS Truststore load failed: X509 trusted CA certificates not found (DefaultTrustManagerFactory)  
+INFO  Loaded 106 trusted CA certificates from the Java default trust store. (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (1512 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 96 extension points (47 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Decompiler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/FunctionID/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/FileFormats/ghidra_scripts
+    /Users/berkan/Projects/mechen-m30-firmware/tools/ghidra
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/8051/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/VersionTracking/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/BSim/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/Atmel/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Swift/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/DATA/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Debug/Debugger/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/JVM/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/PIC/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/PDB/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/BytePatterns/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/PyGhidra/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Base/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating project: /var/folders/z5/8_bkq24n7m7cbt9y2ynl9yqc0000gp/T/m30-mainmenu-eq-slider.XyrX50/project/mainmenueqslider (HeadlessAnalyzer)  
+INFO  Creating project: /var/folders/z5/8_bkq24n7m7cbt9y2ynl9yqc0000gp/T/m30-mainmenu-eq-slider.XyrX50/project/mainmenueqslider (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: /var/folders/z5/8_bkq24n7m7cbt9y2ynl9yqc0000gp/T/m30-mainmenu-eq-slider.XyrX50/project/mainmenueqslider (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///Users/berkan/Projects/m30-work/community/fw/mainmenu.ap (HeadlessAnalyzer)  
+INFO  Using Loader: Raw Binary (ProgramLoader)  
+INFO  Using Language/Compiler: MIPS:LE:32:default:default (ProgramLoader)  
+INFO  Using Library Search Path: [., /System/Library/dyld/dyld_shared_cache_arm64e, /System/Library/dyld/dyld_shared_cache_x86_64, /System/Library/dyld/dyld_shared_cache_x86_64h, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64h, /Users/berkan/Library/Java/Extensions, /Library/Java/Extensions, /Network/Library/Java/Extensions, /System/Library/Java/Extensions, /usr/lib/java] (ProgramLoader)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: LoadAP.java 'analysis/community/fw/mainmenu.ap'  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/berkan/Projects/mechen-m30-firmware/tools/ghidra/LoadAP.java (HeadlessAnalyzer)  
+INFO  LoadAP.java> LoadAP: blocks=90 prologue functions=531 entry=40014c30 (GhidraScript)  
+INFO  REPORT: Execute script: RunMainmenuEqSliderProbe.java  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/berkan/Projects/mechen-m30-firmware/tools/ghidra/RunMainmenuEqSliderProbe.java (HeadlessAnalyzer)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ FINAL name=increment-confirm gains=01,ff,01,fe,02,fd,03 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SLIDER CASE name=increment-confirm event=0x2903 exit_event=0x2905 saved_gain0=1 engine_gain0=1 producer_updates=1 copies=4 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE copy dst=0x9fc1af78 src=0x9fc15620 len=12 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE copy dst=0x9fc1af88 src=0x9fc15620 len=12 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0x484547ac (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE event=0x2903 out=0x9fc1afa0 stored=0329 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc16918 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE copy dst=0x9fc15620 src=0x9fc1af78 len=12 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE copy dst=0x9fc1a19c src=0x9fc15620 len=7 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE producer-ready-check=1 (synthetic) (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE message module=0x0d cmd=0x303 payload=0707 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE event=0x2905 out=0x9fc1afa0 stored=0529 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ FINAL name=decrement-confirm gains=fd,ff,01,fe,02,fd,03 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SLIDER CASE name=decrement-confirm event=0x2904 exit_event=0x2905 saved_gain0=-3 engine_gain0=-3 producer_updates=1 copies=4 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE copy dst=0x9fc1af78 src=0x9fc15620 len=12 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE copy dst=0x9fc1af88 src=0x9fc15620 len=12 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0x484547ac (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE event=0x2904 out=0x9fc1afa0 stored=0429 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc16918 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE copy dst=0x9fc15620 src=0x9fc1af78 len=12 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE copy dst=0x9fc1a19c src=0x9fc15620 len=7 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE producer-ready-check=1 (synthetic) (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE message module=0x0d cmd=0x303 payload=0707 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE event=0x2905 out=0x9fc1afa0 stored=0529 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ FINAL name=increment-cancel gains=00,ff,01,fe,02,fd,03 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SLIDER CASE name=increment-cancel event=0x2903 exit_event=0x2906 saved_gain0=0 engine_gain0=1 producer_updates=1 copies=5 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE copy dst=0x9fc1af78 src=0x9fc15620 len=12 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE copy dst=0x9fc1af88 src=0x9fc15620 len=12 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0x484547ac (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE event=0x2903 out=0x9fc1afa0 stored=0329 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc1691c (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE ui-service pc=0xbfc16918 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE copy dst=0x9fc15620 src=0x9fc1af78 len=12 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE copy dst=0x9fc1a19c src=0x9fc15620 len=7 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE producer-ready-check=1 (synthetic) (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE message module=0x0d cmd=0x303 payload=0707 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE event=0x2906 out=0x9fc1afa0 stored=0629 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SERVICE copy dst=0x9fc15620 src=0x9fc1af88 len=12 (GhidraScript)  
+INFO  RunMainmenuEqSliderProbe.java> MAINMENU EQ SLIDER P-CODE PASS cases=3 input_state=synthetic services=stubbed (GhidraScript)  
+INFO  /mainmenu.ap: file created (berkan) (LocalFileSystem)  
+INFO  REPORT: Save succeeded for: /mainmenu.ap (mainmenueqslider:/mainmenu.ap) (HeadlessAnalyzer)  
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)  
