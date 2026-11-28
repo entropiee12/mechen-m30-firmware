@@ -116,16 +116,18 @@ static void export_native(word ctx,const byte *record)
 #endif
 int save_native(byte *record,word slot,word length,word op)
 {
-    word live_context=SETTINGS_CARD_CONTEXT;
+    volatile word saved_context=SETTINGS_CARD_CONTEXT;
     /* Preserve the selector's live card handle before the resident settings
      * write can reuse shared system state. */
     int result=SYS((word)record,slot,length,op);
-    if (live_context<=127) {
-        export_native(live_context,record);
-        ((int (*)(word,word,word,word,word))0xbfc1658du)(live_context,':',0,0,0);
+    if (saved_context<=127) {
+        word ctx=saved_context;
+        export_native(ctx,record);
+        ((int (*)(word,word,word,word,word))0xbfc1658du)(ctx,':',0,0,0);
     } else if (SYS(1,0,(word)"card.drv",10)==0) {
-        int ctx=(signed char)SYS(1,16,0,41);
-        if (ctx>=0) {
+        volatile int mounted_context=(signed char)SYS(1,16,0,41);
+        if (mounted_context>=0) {
+            word ctx=(word)mounted_context;
             export_native(ctx,record);
             SYS(ctx,0,0,42);
         }
