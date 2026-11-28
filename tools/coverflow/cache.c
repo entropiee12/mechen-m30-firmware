@@ -27,7 +27,7 @@ int flow_cache(struct flow_tile *slots,struct flow_window *window,const u16 trac
             }
         }
     }
-    static const u8 priority[]={2,1,3,0,4};
+    static const u8 priority[]={1,0,2};
     for (unsigned k=0;k<FLOW_SLOTS;k++) {
         unsigned i=priority[k];
         if (!tracks[i] || at[i]>=0) continue;
@@ -37,12 +37,12 @@ int flow_cache(struct flow_tile *slots,struct flow_window *window,const u16 trac
         if (!load(tracks[i],slots+j,ctx) || !valid(slots+j,pack,count) ||
             slots[j].track!=tracks[i]) {
             slots[j].magic=0;
-            if (i==FLOW_VISIBLE/2+1) return 0;
+            if (i==1) return 0;
             continue;
         }
         pinned|=1u<<j;
         for (unsigned m=0;m<FLOW_SLOTS;m++) if (tracks[m]==tracks[i]) at[m]=j;
     }
-    for (unsigned i=0;i<FLOW_VISIBLE;i++) window->visible[i]=at[i+1]<0?0:slots+at[i+1];
-    return window->visible[FLOW_VISIBLE/2]!=0;
+    for (unsigned i=0;i<FLOW_VISIBLE;i++) window->visible[i]=at[i]<0?0:slots+at[i];
+    return window->visible[1]!=0;
 }

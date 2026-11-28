@@ -195,8 +195,8 @@ int flow_auto_paint(u32 kind,u32 pos,u32 count)
     u16 *scratch=(u16 *)((u8 *)buffer+available);
     int have_center=NATIVE_PREPARE(&window,&image,scratch);
     int drawn=0;
-    int missing_side=ok && ((tracks[1] && !window.visible[0]) ||
-                            (tracks[3] && !window.visible[2]));
+    int missing_side=ok && ((tracks[0] && !window.visible[0]) ||
+                            (tracks[2] && !window.visible[2]));
     if (ok && !missing_side && buffer==*(u16 *volatile *)0x9fc0bf50u &&
         bytes==*(volatile u16 *)0x9fc0bf54u &&
         (kind==1 ? VS->magic==M3UPLAY_MAGIC && VS->pos==pos && VS->count==count :

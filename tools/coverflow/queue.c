@@ -18,7 +18,7 @@ void flow_tracks(u16 tracks[FLOW_SLOTS],u32 pos,u32 count,u32 shuffle,u32 loop,u
 {
     for (int i=0;i<FLOW_SLOTS;i++) tracks[i]=0;
     if (!pos || pos>count) return;
-    tracks[FLOW_SLOTS/2]=pos;
+    tracks[1]=pos;
     if (loop==1 || loop>=6) return;
     int wrap=loop==2 || loop==4;
     u32 h=1;
@@ -26,7 +26,7 @@ void flow_tracks(u16 tracks[FLOW_SLOTS],u32 pos,u32 count,u32 shuffle,u32 loop,u
     u32 end=1u<<(2*h),mask=(1u<<h)-1;
     if (shuffle!=1) {
         for (int i=0;i<FLOW_SLOTS;i++) {
-            int n=(int)pos+i-FLOW_SLOTS/2;
+            int n=(int)pos+i-1;
             if (wrap) {
                 while (n<1) n+=count;
                 while (n>(int)count) n-=count;
@@ -38,14 +38,14 @@ void flow_tracks(u16 tracks[FLOW_SLOTS],u32 pos,u32 count,u32 shuffle,u32 loop,u
     if (!key || cursor>end) return;
     for (int dir=-1;dir<=1;dir+=2) {
         u32 p=cursor;
-        for (int i=1;i<=FLOW_SLOTS/2;) {
+        for (int i=1;i<=1;) {
             if (dir>0 && p==end) break;
             if (dir<0 && p<=1) {
                 if (!wrap) break;
                 p=end;
             } else p+=dir;
             u32 n=m3u_shuffle_index(p,h,mask,key)+1;
-            if (n<=count) tracks[FLOW_SLOTS/2+dir*i++]=n;
+            if (n<=count) tracks[1+dir*i++]=n;
         }
     }
 }
@@ -67,7 +67,7 @@ void flow_native_tracks(u16 tracks[FLOW_SLOTS],u32 pos,u32 count,u32 shuffle,u32
     if (shuffle!=1) { flow_tracks(tracks,pos,count,0,loop,0,0); return; }
     for (int i=0;i<FLOW_SLOTS;i++) tracks[i]=0;
     if (!pos || pos>count) return;
-    tracks[FLOW_SLOTS/2]=pos;
+    tracks[1]=pos;
     if (loop==1 || loop>=6) return;
     volatile struct state *s=ST;
     if (s->magic!=MAGIC || s->n!=count || !s->half || s->half>8) return;
@@ -77,10 +77,10 @@ void flow_native_tracks(u16 tracks[FLOW_SLOTS],u32 pos,u32 count,u32 shuffle,u32
     if (!cursor) return;
     for (int direction=-1;direction<=1;direction+=2) {
         u32 p=direction<0?cursor-1:cursor;
-        for (int i=1;i<=FLOW_SLOTS/2;) {
+        for (int i=1;i<=1;) {
             if (direction<0 ? !p : p>=end) break;
             u32 n=native_index(direction<0?--p:p++,s);
-            if (n<count) tracks[FLOW_SLOTS/2+direction*i++]=n+1;
+            if (n<count) tracks[1+direction*i++]=n+1;
         }
     }
 }
